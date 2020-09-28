@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "327238212955",
+    "firebase_url": "https://safer-9d216.firebaseio.com",
+    "project_id": "safer-9d216",
+    "storage_bucket": "safer-9d216.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327238212955:android:1b4d0c2d0ca29646030e7e",
+        "android_client_info": {
+          "package_name": "com.example.safer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "327238212955-7gvbv4ejkqqthl1qjv9291ob4e2ska6k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.safer",
+            "certificate_hash": "537d8692a8c9f708115d89878edd52e78633a7fe"
+          }
+        },
+        {
+          "client_id": "327238212955-a5gi94fjdcf9ncavo0hpqvll12isngv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi7d1sNCUBwCGB8wKK34Zfhi6g8MEeGQI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "327238212955-a5gi94fjdcf9ncavo0hpqvll12isngv5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
