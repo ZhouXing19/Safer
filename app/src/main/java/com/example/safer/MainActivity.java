@@ -10,6 +10,8 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     private Button mDriver, mCustomer;
+    private Button loginButton;
+
 
 
     @Override
@@ -26,6 +28,31 @@ public class MainActivity extends AppCompatActivity {
 
                 // Lead to the login page
                 Intent intent = new Intent(MainActivity.this, DriverLoginActivity.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
+        });
+
+        mCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Lead to the login page
+                Intent intent = new Intent(MainActivity.this, CustomerLoginActivity.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
+        });
+
+        // ----------- My own part --------------
+
+        loginButton = (Button) findViewById(R.id.login);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
                 return;

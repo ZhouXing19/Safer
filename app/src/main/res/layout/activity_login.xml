@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello There!"
+        android:textSize="40dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="30dp"
+        android:fontFamily="@font/bold"
+        android:textColor="@color/darkBlue"/>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="Email Address"
+        android:fontFamily="@font/light"
+        android:background="@drawable/inputfield"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="280dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:background="@drawable/inputfield"
+        android:fontFamily="@font/light"
+        android:hint="Password"
+        android:layout_marginTop="14dp"
+        android:inputType="textPassword"
+        android:layout_below="@id/email"
+        android:layout_alignLeft="@id/email"
+        />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="162dp"
+        android:layout_height="53dp"
+        android:layout_below="@id/password"
+        android:layout_marginTop="20dp"
+        android:text="login"
+        android:textSize="20dp"
+        android:fontFamily="@font/light"
+        android:textColor="@android:color/white"
+        android:layout_alignLeft="@id/password"
+        android:background="@drawable/buttonred"/>
+
+    <TextView
+        android:id="@+id/not_a_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/password"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/light"
+        android:text="Not a user? "
+        android:textColor="@color/darkBlue"
+        android:textSize="18sp"
+        />
+
+    <Button
+
+        android:id="@+id/registration"
+        android:layout_width="130dp"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/not_a_user"
+        android:layout_alignTop="@+id/not_a_user"
+        android:layout_toEndOf="@id/not_a_user"
+        android:layout_marginLeft="8dp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/light"
+        android:textSize="15dp"
+        android:background="@drawable/buttonblue"
+        android:text="Regiser Here!" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+
+        android:layout_alignLeft="@id/hello"
+        android:layout_alignParentTop="true"
+
+
+        android:layout_marginTop="30dp"
+
+        app:srcCompat="@drawable/back" />
+
+
+</RelativeLayout>

@@ -6,13 +6,44 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a88c73f9-8ae2-48fc-9593-10eb563d9d74" name="Default Changelist" comment="" />
+    <list default="true" id="a88c73f9-8ae2-48fc-9593-10eb563d9d74" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/CustomerLoginActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/LoginActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/MapActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/buttonblue.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/buttonorange.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/buttonred.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/inputfield.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_customer_login.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_map.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/DriverLoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/DriverLoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_5_API_26" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_30" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -49,16 +80,28 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="resourceFile" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_30" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-09-28T18:09:55.042Z" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
   </component>
   <component name="RecentsManager">
@@ -167,6 +210,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="428" y="287" key="AndroidCreateResourceFileDialog" timestamp="1601340070605">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="428" y="287" key="AndroidCreateResourceFileDialog/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601340070605" />
     <state width="1006" height="202" key="GridCell.Tab.0.bottom" timestamp="1601311779307">
       <screen x="1680" y="82" width="1048" height="770" />
     </state>

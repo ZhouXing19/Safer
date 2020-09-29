@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,12 +20,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class DriverLoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private EditText mEmail, mPassword;
-    private Button mLogin, mRegistration;
+    private TextView mRegister;
+    private Button mLogin;
+    private ImageView mBack;
 
-    // ---------- Declare -----------
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
@@ -31,17 +34,16 @@ public class DriverLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_login);
+        setContentView(R.layout.activity_login);
 
-
-        // ---------- See if we can find the user in the firebase database -----------
+        // ------------ if this application has logged in, no need to see this page -----------------
         mAuth = FirebaseAuth.getInstance();
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if(user!=null){
-                    Intent intent = new Intent(DriverLoginActivity.this, MapActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MapActivity.class);
                     startActivity(intent);
                     finish();
                     return;
@@ -49,34 +51,36 @@ public class DriverLoginActivity extends AppCompatActivity {
             }
         };
 
-
         mEmail = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
 
         mLogin = (Button) findViewById(R.id.login);
-        mRegistration = (Button) findViewById(R.id.registration);
+        mRegister = (TextView) findViewById(R.id.registration);
 
-        mRegistration.setOnClickListener(new View.OnClickListener() {
+        mBack = (ImageView) findViewById(R.id.back);
+
+        mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // ---------- Pass the text in the edittext into the database -----------
                 final String email = mEmail.getText().toString();
                 final String password = mPassword.getText().toString();
-                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(DriverLoginActivity.this, new OnCompleteListener<AuthResult>() {
+
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(!task.isSuccessful()){
-                            Toast.makeText(DriverLoginActivity.this, "sign up error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Sign up error, maybe user exists!", Toast.LENGTH_SHORT).show();
+
                         }else{
                             String user_id = mAuth.getCurrentUser().getUid();
-                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Riders").child(user_id);
+                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Students").child(user_id);
                             current_user_db.setValue(true);
                         }
                     }
                 });
-
             }
         });
+
 
         mLogin.setOnClickListener(new View.OnClickListener() {
             // ---------- Pass the text in the edittext into the database -----------
@@ -84,21 +88,28 @@ public class DriverLoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String email = mEmail.getText().toString();
                 final String password = mPassword.getText().toString();
-                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(DriverLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(!task.isSuccessful()){
-                            Toast.makeText(DriverLoginActivity.this, "sign in error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "sign in error", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(LoginActivity.this, "Sucessfully Signed in!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
         });
 
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
     }
-
     @Override
     protected void onStart() {
 
@@ -111,6 +122,6 @@ public class DriverLoginActivity extends AppCompatActivity {
         super.onStop();
         mAuth.removeAuthStateListener(firebaseAuthListener);
     }
-}
 
+}
 
