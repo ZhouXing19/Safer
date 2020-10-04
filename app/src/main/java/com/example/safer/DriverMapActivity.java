@@ -4,6 +4,7 @@ package com.example.safer;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
@@ -40,6 +41,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -51,8 +53,11 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.graphics.Point;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +65,7 @@ import java.util.List;
 public class DriverMapActivity extends FragmentActivity implements OnMapReadyCallback{
 //在implements后加东西
     private GoogleMap mMap;
+    private FloatingActionButton postButton;
     Location mLastLocation;
     LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -84,6 +90,17 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        postButton = (FloatingActionButton) findViewById(R.id.postButoon);
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DriverMapActivity.this, PostDangerActivity.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
+        });
 
 
     }

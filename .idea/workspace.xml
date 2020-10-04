@@ -10,19 +10,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a88c73f9-8ae2-48fc-9593-10eb563d9d74" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_firebase_geofire_common_3_0_0_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_firebase_geofire_java_3_0_0_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_base_17_3_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_basement_17_3_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_location_17_1_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_maps_17_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_places_placereport_17_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_tasks_17_1_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/debug/res/values/google_maps_api.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/DriverMapActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_driver_map.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/style_json.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/release/res/values/google_maps_api.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_annotation_annotation_experimental_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_cardview_cardview_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_coordinatorlayout_coordinatorlayout_1_1_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_recyclerview_recyclerview_1_1_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_transition_transition_1_2_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_viewpager2_viewpager2_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_material_material_1_2_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/PostDangerActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/postbutton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-ldpi/postbutton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/postbutton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/postbutton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/postbutton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/postbutton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/darkbackground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_add.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_view.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_post_danger.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/api-versions-0-30.0.4.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/appcompat/group-index.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/constraintlayout/group-index.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/coordinatorlayout/group-index.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/test/espresso/group-index.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/test/ext/group-index.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/android/support/group-index.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/google/android/gms/group-index.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/google/android/material/group-index.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/google/firebase/group-index.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/master-index.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/sdk-registry.xml/sdk-registry.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/typos-en.txt-2.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -38,16 +57,14 @@
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_base_17_1_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_basement_17_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_tasks_17_0_0_aar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/DriverMapActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/DriverMapActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_driver_map.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_driver_map.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +99,12 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Safer" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="android" type="c8890929:TasksNode$1" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Safer" type="f1a62948:ProjectNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
               </path>
             </expand>
             <select />
@@ -94,6 +116,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Class" />
         <option value="resourceFile" />
       </list>
     </option>
@@ -111,15 +134,20 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_30" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-09-28T18:09:55.042Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-10-04T00:17:00.033Z" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android.recentlyUsedThemes" value="Theme.MaterialComponents" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="android.template.545238167">
+      <recent name="com.example.safer" />
+    </key>
     <key name="android.template.1547433622">
       <recent name="com.example.safer" />
     </key>
@@ -186,6 +214,44 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Safer [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Safer [cleanBuildCache]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="cleanBuildCache" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="Safer [signingReport]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -207,6 +273,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Safer [build]" />
+        <item itemvalue="Gradle.Safer [cleanBuildCache]" />
         <item itemvalue="Gradle.Safer [signingReport]" />
       </list>
     </recent_temporary>
@@ -224,38 +292,49 @@
     </task>
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="653" y="241" key="#com.intellij.ide.util.MemberChooser" timestamp="1601742667353">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="653" y="241" key="#com.intellij.ide.util.MemberChooser/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601742667353" />
-    <state x="428" y="287" key="AndroidCreateResourceFileDialog" timestamp="1601340070605">
+    <state x="428" y="287" key="AndroidCreateResourceFileDialog" timestamp="1601750954438">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="428" y="287" key="AndroidCreateResourceFileDialog/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601340070605" />
-    <state width="1638" height="253" key="GridCell.Tab.0.bottom" timestamp="1601749041516">
+    <state x="428" y="287" key="AndroidCreateResourceFileDialog/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601750954438" />
+    <state x="428" y="237" key="AndroidThemeDialog" timestamp="1601766041939">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="253" key="GridCell.Tab.0.bottom/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601749041516" />
+    <state x="428" y="237" key="AndroidThemeDialog/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601766041939" />
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1601770647074">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601770647074" />
     <state width="1006" height="202" key="GridCell.Tab.0.bottom/1680.82.1048.770/0.0.1680.1050@1680.82.1048.770" timestamp="1601311779307" />
-    <state width="1638" height="253" key="GridCell.Tab.0.center" timestamp="1601749041514">
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1601770647073">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="253" key="GridCell.Tab.0.center/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601749041514" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601770647073" />
     <state width="1006" height="202" key="GridCell.Tab.0.center/1680.82.1048.770/0.0.1680.1050@1680.82.1048.770" timestamp="1601311779306" />
-    <state width="1638" height="253" key="GridCell.Tab.0.left" timestamp="1601749041513">
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1601770647072">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="253" key="GridCell.Tab.0.left/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601749041513" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601770647072" />
     <state width="1006" height="202" key="GridCell.Tab.0.left/1680.82.1048.770/0.0.1680.1050@1680.82.1048.770" timestamp="1601311779305" />
-    <state width="1638" height="253" key="GridCell.Tab.0.right" timestamp="1601749041515">
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1601770647074">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="253" key="GridCell.Tab.0.right/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601749041515" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601770647074" />
     <state width="1006" height="202" key="GridCell.Tab.0.right/1680.82.1048.770/0.0.1680.1050@1680.82.1048.770" timestamp="1601311779306" />
     <state x="617" y="310" key="chooseDestDirectoryDialog" timestamp="1601355898970">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="617" y="310" key="chooseDestDirectoryDialog/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601355898970" />
+    <state x="578" y="299" key="extract.method.dialog" timestamp="1601768262274">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="578" y="299" key="extract.method.dialog/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601768262274" />
   </component>
 </project>
