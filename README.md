@@ -7,6 +7,9 @@ An andriod navigation map app where you can share and view dangers nearby, and i
 - Firebase
 - Adobe XD for UI design
 
+## Preview
+<img src="preview.gif" height=400><br>
+
 ## Environment
 - Developped in AndroidStudio 4.0.1
 - Tested in Pixel 2 API 30
