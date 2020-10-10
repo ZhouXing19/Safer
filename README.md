@@ -8,7 +8,7 @@ An andriod navigation map app where you can share and view dangers nearby, and i
 - Adobe XD for UI design
 
 ## Preview
-<img src="preview_map.gif" height=400><br>
+<img src="preview_map.gif" height=600><br>
 
 ## Environment
 - Developped in AndroidStudio 4.0.1
