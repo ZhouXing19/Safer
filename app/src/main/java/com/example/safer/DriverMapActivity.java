@@ -63,7 +63,7 @@ import java.util.List;
 
 
 public class DriverMapActivity extends FragmentActivity implements OnMapReadyCallback{
-//在implements后加东西
+
     private GoogleMap mMap;
     private FloatingActionButton postButton;
     Location mLastLocation;
@@ -136,7 +136,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
 
                 for(Location location: locationResult.getLocations()){
 
-                    //以下来自onlocationChanged
+
                     if(getApplicationContext()!=null){
 
 //                        if(!customerId.equals("") && mLastLocation!=null && location!=null){
@@ -277,23 +277,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
 
 
 
-//    private void connectDriver(){
-//        checkLocationPermission();
-//        mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
-//        mMap.setMyLocationEnabled(true);
-//    }
-//
-//    private void disconnectDriver(){
-//        if(mFusedLocationClient != null){
-//            mFusedLocationClient.removeLocationUpdates(mLocationCallback);
-//        }
-//        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driverAvailable");
-//
-//        GeoFire geoFire = new GeoFire(ref);
-//        geoFire.removeLocation(userId);
-//
-//    }
+
 
 
     @Override
