@@ -33,7 +33,6 @@
             android:label="@string/title_activity_pick_location" />
         <activity android:name=".PostDangerActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MapActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
