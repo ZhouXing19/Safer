@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if(user!=null){
-                    Intent intent = new Intent(LoginActivity.this, DriverMapActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainMapActivity.class);
                     startActivity(intent);
                     finish();
                     return;
@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                             String user_id = mAuth.getCurrentUser().getUid();
                             DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Students").child(user_id);
                             current_user_db.setValue(true);
+                            Toast.makeText(LoginActivity.this, "Sign up successfully!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

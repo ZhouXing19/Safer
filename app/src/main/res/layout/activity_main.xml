@@ -8,52 +8,7 @@
     android:background="@drawable/backgroud"
     >
 
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="I AM A RIDER"
-        android:fontFamily="@font/light"
-        android:textColor="@android:color/white"
-        android:background="@drawable/buttonred"
-        android:id="@+id/driver" />
 
-
-
-    <Button
-        android:id="@+id/customer"
-        android:fontFamily="@font/light"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/driver"
-        android:textColor="@android:color/white"
-        android:background="@drawable/buttonorange"
-        android:text="I AM A CUSTOMER" />
-
-    <TextView
-        android:id="@+id/not_a_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="600dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/light"
-        android:text="Not a user? "
-        android:textColor="@color/darkBlue"
-        android:textSize="18sp"
-        />
-
-    <TextView
-
-        android:id="@+id/registration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/not_a_user"
-        android:layout_toEndOf="@id/not_a_user"
-        android:layout_marginLeft="5dp"
-        android:textColor="@color/danganRed"
-        android:fontFamily="@font/bold"
-        android:textSize="18sp"
-        android:text="Regiser Here!" />
 
     <TextView
         android:id="@+id/Welcome"
@@ -81,11 +36,11 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="162dp"
+        android:layout_width="182dp"
         android:layout_height="53dp"
         android:layout_below="@id/nice_to_see_you"
         android:layout_marginTop="20dp"
-        android:text="login"
+        android:text="login / signup"
         android:textSize="20dp"
         android:fontFamily="@font/light"
         android:textColor="@android:color/white"
