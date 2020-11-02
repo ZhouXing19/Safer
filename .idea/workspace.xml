@@ -6,7 +6,8 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="warn" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="PostDangerActivity" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
@@ -19,8 +20,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/MapActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/PickLocationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/PickLocationActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/PostDangerActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/PostDangerActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,11 +113,11 @@
     <key name="android.template.1547433622">
       <recent name="com.example.safer" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app" />
-    </key>
     <key name="android.template.545238167">
       <recent name="com.example.safer" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -259,13 +262,21 @@
       <option name="project" value="LOCAL" />
       <updated>1601770687727</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="[Zhou-master] Delete irrelevant file">
+      <created>1604265643859</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1604265643859</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="floating action button, post dange page" />
-    <option name="LAST_COMMIT_MESSAGE" value="floating action button, post dange page" />
+    <MESSAGE value="[Zhou-master] Delete irrelevant file" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Zhou-master] Delete irrelevant file" />
   </component>
   <component name="WindowStateProjectService">
     <state x="440" y="190" key="#Notifications" timestamp="1601771218338">
@@ -294,34 +305,34 @@
     </state>
     <state x="2283" y="109" key="CommitChangelistDialog2/1680.-65.2560.1440/0.0.1680.1050@1680.-65.2560.1440" timestamp="1604265643416" />
     <state x="396" y="127" key="CommitChangelistDialog2/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601770687180" />
-    <state width="2518" height="387" key="GridCell.Tab.0.bottom" timestamp="1604265584927">
+    <state width="2518" height="387" key="GridCell.Tab.0.bottom" timestamp="1604276028691">
       <screen x="1680" y="-65" width="2560" height="1440" />
     </state>
-    <state width="2518" height="387" key="GridCell.Tab.0.bottom/1680.-65.2560.1440/0.0.1680.1050@1680.-65.2560.1440" timestamp="1604265584927" />
+    <state width="2518" height="387" key="GridCell.Tab.0.bottom/1680.-65.2560.1440/0.0.1680.1050@1680.-65.2560.1440" timestamp="1604276028691" />
     <state width="1638" height="257" key="GridCell.Tab.0.bottom/1680.-720.2560.1440/0.0.1680.1050@0.0.1680.1050" timestamp="1602363644056" />
     <state width="1638" height="374" key="GridCell.Tab.0.bottom/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601818266145" />
     <state width="1006" height="202" key="GridCell.Tab.0.bottom/1680.82.1048.770/0.0.1680.1050@1680.82.1048.770" timestamp="1601311779307" />
     <state width="1638" height="295" key="GridCell.Tab.0.bottom/1680.82.1048.770/0.0.1680.972@0.0.1680.972" timestamp="1601818362841" />
-    <state width="2518" height="387" key="GridCell.Tab.0.center" timestamp="1604265584926">
+    <state width="2518" height="387" key="GridCell.Tab.0.center" timestamp="1604276028690">
       <screen x="1680" y="-65" width="2560" height="1440" />
     </state>
-    <state width="2518" height="387" key="GridCell.Tab.0.center/1680.-65.2560.1440/0.0.1680.1050@1680.-65.2560.1440" timestamp="1604265584926" />
+    <state width="2518" height="387" key="GridCell.Tab.0.center/1680.-65.2560.1440/0.0.1680.1050@1680.-65.2560.1440" timestamp="1604276028690" />
     <state width="1638" height="257" key="GridCell.Tab.0.center/1680.-720.2560.1440/0.0.1680.1050@0.0.1680.1050" timestamp="1602363644055" />
     <state width="1638" height="374" key="GridCell.Tab.0.center/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601818266144" />
     <state width="1006" height="202" key="GridCell.Tab.0.center/1680.82.1048.770/0.0.1680.1050@1680.82.1048.770" timestamp="1601311779306" />
     <state width="1638" height="295" key="GridCell.Tab.0.center/1680.82.1048.770/0.0.1680.972@0.0.1680.972" timestamp="1601818362839" />
-    <state width="2518" height="387" key="GridCell.Tab.0.left" timestamp="1604265584925">
+    <state width="2518" height="387" key="GridCell.Tab.0.left" timestamp="1604276028688">
       <screen x="1680" y="-65" width="2560" height="1440" />
     </state>
-    <state width="2518" height="387" key="GridCell.Tab.0.left/1680.-65.2560.1440/0.0.1680.1050@1680.-65.2560.1440" timestamp="1604265584925" />
+    <state width="2518" height="387" key="GridCell.Tab.0.left/1680.-65.2560.1440/0.0.1680.1050@1680.-65.2560.1440" timestamp="1604276028688" />
     <state width="1638" height="257" key="GridCell.Tab.0.left/1680.-720.2560.1440/0.0.1680.1050@0.0.1680.1050" timestamp="1602363644054" />
     <state width="1638" height="374" key="GridCell.Tab.0.left/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601818266143" />
     <state width="1006" height="202" key="GridCell.Tab.0.left/1680.82.1048.770/0.0.1680.1050@1680.82.1048.770" timestamp="1601311779305" />
     <state width="1638" height="295" key="GridCell.Tab.0.left/1680.82.1048.770/0.0.1680.972@0.0.1680.972" timestamp="1601818362839" />
-    <state width="2518" height="387" key="GridCell.Tab.0.right" timestamp="1604265584927">
+    <state width="2518" height="387" key="GridCell.Tab.0.right" timestamp="1604276028690">
       <screen x="1680" y="-65" width="2560" height="1440" />
     </state>
-    <state width="2518" height="387" key="GridCell.Tab.0.right/1680.-65.2560.1440/0.0.1680.1050@1680.-65.2560.1440" timestamp="1604265584927" />
+    <state width="2518" height="387" key="GridCell.Tab.0.right/1680.-65.2560.1440/0.0.1680.1050@1680.-65.2560.1440" timestamp="1604276028690" />
     <state width="1638" height="257" key="GridCell.Tab.0.right/1680.-720.2560.1440/0.0.1680.1050@0.0.1680.1050" timestamp="1602363644056" />
     <state width="1638" height="374" key="GridCell.Tab.0.right/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601818266145" />
     <state width="1006" height="202" key="GridCell.Tab.0.right/1680.82.1048.770/0.0.1680.1050@1680.82.1048.770" timestamp="1601311779306" />

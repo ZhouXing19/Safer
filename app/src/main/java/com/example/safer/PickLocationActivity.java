@@ -2,6 +2,8 @@ package com.example.safer;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +15,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 public class PickLocationActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -54,8 +58,21 @@ public class PickLocationActivity extends FragmentActivity implements OnMapReady
             @Override
             public void onClick(View v) {
                 LatLng myFocus = mMap.getCameraPosition().target;
-                Log.w("PickLocationActivity", Double.toString(myFocus.latitude)+Double.toString(myFocus.longitude));
+                double[] SelectedLocation = {myFocus.latitude, myFocus.longitude};
+                Log.w("Pick!!LocationActivity", Double.toString(SelectedLocation[0])+Double.toString(SelectedLocation[1]));
+                Intent data = new Intent();
+                data.putExtra("SelectedLocation", SelectedLocation);
+                data.putExtra("demoStr", "helloworld");
+                setResult(RESULT_OK, data);
+                finish();
+
             }
         });
+
+
     }
+
+
+
+
 }
