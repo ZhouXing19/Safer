@@ -62,7 +62,6 @@ public class PickLocationActivity extends FragmentActivity implements OnMapReady
                 Log.w("Pick!!LocationActivity", Double.toString(SelectedLocation[0])+Double.toString(SelectedLocation[1]));
                 Intent data = new Intent();
                 data.putExtra("SelectedLocation", SelectedLocation);
-                data.putExtra("demoStr", "helloworld");
                 setResult(RESULT_OK, data);
                 finish();
 
