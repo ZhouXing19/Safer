@@ -13,7 +13,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a88c73f9-8ae2-48fc-9593-10eb563d9d74" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/GIFs/PostTexts2Firebase.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_annotations_4_7_1_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_disklrucache_4_7_1_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_gifdecoder_4_7_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_glide_4_7_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_auth_18_1_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_auth_api_phone_17_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_auth_base_17_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_5_2_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GIFs/GoogleOAth.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/ProfileActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_off.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_profile.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -33,12 +45,15 @@
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/DangerHelperClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/DangerHelperClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/DangerList.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/DangerList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/IdGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/IdGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/PickLocationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/PickLocationActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/MainMapActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/MainMapActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/safer/PostDangerActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/safer/PostDangerActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_driver_map.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_driver_map.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_map.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_map.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_post_danger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_post_danger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,17 +137,21 @@
     <key name="android.template.362883931">
       <recent name="com.example.safer" />
     </key>
+    <key name="android.template.545238167">
+      <recent name="com.example.safer" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
     <key name="android.template.-482084922">
       <recent name="com.example.safer" />
     </key>
     <key name="android.template.1547433622">
       <recent name="com.example.safer" />
     </key>
-    <key name="android.template.545238167">
+    <key name="android.template.1717775148">
       <recent name="com.example.safer" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -307,15 +326,19 @@
     </state>
     <state x="2675" y="266" key="#com.intellij.ide.util.MemberChooser/1680.-65.2560.1440/0.0.1680.1050@1680.-65.2560.1440" timestamp="1604725552157" />
     <state x="653" y="241" key="#com.intellij.ide.util.MemberChooser/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601742667353" />
-    <state x="2561" y="318" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1604265582116">
+    <state x="2561" y="318" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1604780169745">
       <screen x="1680" y="-65" width="2560" height="1440" />
     </state>
-    <state x="2561" y="318" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1680.-65.2560.1440/0.0.1680.1050@1680.-65.2560.1440" timestamp="1604265582116" />
+    <state x="2561" y="318" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1680.-65.2560.1440/0.0.1680.1050@1680.-65.2560.1440" timestamp="1604780169745" />
     <state x="578" y="279" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601782666062" />
     <state x="428" y="287" key="AndroidCreateResourceFileDialog" timestamp="1601750954438">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="428" y="287" key="AndroidCreateResourceFileDialog/1680.82.1048.770/0.0.1680.1050@0.0.1680.1050" timestamp="1601750954438" />
+    <state x="2815" y="509" key="AndroidCreateXmlResourceDialog" timestamp="1604779065231">
+      <screen x="1680" y="-65" width="2560" height="1440" />
+    </state>
+    <state x="2815" y="509" key="AndroidCreateXmlResourceDialog/1680.-65.2560.1440/0.0.1680.1050@1680.-65.2560.1440" timestamp="1604779065231" />
     <state x="428" y="237" key="AndroidThemeDialog" timestamp="1601766041939">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

@@ -33,7 +33,7 @@ public class PostDangerActivity extends AppCompatActivity {
     private ImageView mBack;
     private TextView mPickFromMap;
     private EditText mTime, mLocation, mDescription;
-    private FloatingActionButton mPost;
+    private FloatingActionButton mPost, mProfile;
 
     private final int REQUEST_CODE = 20;
 
@@ -53,7 +53,7 @@ public class PostDangerActivity extends AppCompatActivity {
         mLocation = (EditText) findViewById(R.id.location);
         mDescription = (EditText) findViewById(R.id.descript);
         mPost = (FloatingActionButton) findViewById(R.id.postButton);
-
+        mProfile = (FloatingActionButton) findViewById(R.id.profileBtn);
 
 
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +111,14 @@ public class PostDangerActivity extends AppCompatActivity {
 
         });
 
+        mProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PostDangerActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                return;
+            }
+        });
 
 
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.safer.DriverMapActivity" >
+    tools:context="com.example.safer.MainMapActivity" >
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -19,7 +19,7 @@
         android:id="@+id/postButoon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
+        app:srcCompat="@drawable/ic_add"
         app:backgroundTint="@color/danganRed"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
@@ -27,9 +27,15 @@
         android:layout_marginBottom="30dp"
         android:focusable="true"
         android:clickable="true"
-
-
         app:tint="@android:color/white" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/postButoon"
+        android:layout_alignEnd="@+id/postButoon"
+        app:srcCompat="@drawable/ic_profile"
+        android:tint="@android:color/white"
+        android:layout_marginBottom="20dp" />
 
 </RelativeLayout>
