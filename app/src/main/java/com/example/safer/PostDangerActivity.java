@@ -1,9 +1,13 @@
 package com.example.safer;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,11 +19,28 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+
 public class PostDangerActivity extends AppCompatActivity {
+    public static final String TAG = "PostDangerActivity";
+
     private ImageView mBack;
     private TextView mPickFromMap;
     private EditText mTime, mLocation, mDescription;
-    private FloatingActionButton mSubmit;
+    private FloatingActionButton mPost, mProfile;
+
+    private final int REQUEST_CODE = 20;
+
+
+
+    FirebaseDatabase rootNode;
+    DatabaseReference dangerReference, userReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +52,8 @@ public class PostDangerActivity extends AppCompatActivity {
         mTime = (EditText) findViewById(R.id.time);
         mLocation = (EditText) findViewById(R.id.location);
         mDescription = (EditText) findViewById(R.id.descript);
-        mSubmit = (FloatingActionButton) findViewById(R.id.submitButton);
-
+        mPost = (FloatingActionButton) findViewById(R.id.postButton);
+        mProfile = (FloatingActionButton) findViewById(R.id.profileBtn);
 
 
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -46,33 +67,84 @@ public class PostDangerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PostDangerActivity.this, PickLocationActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
+
+
+        mPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String strTime = mTime.getText().toString();
+                String strDescript = mDescription.getText().toString();
+                String strLocation = mLocation.getText().toString();
+
+                if (strLocation.replaceAll("//s", "").equalsIgnoreCase("")
+                        || strTime.replaceAll("//s", "").equalsIgnoreCase("")
+                        || strDescript.replaceAll("//s", "").equalsIgnoreCase("")) {
+                    Toast.makeText(PostDangerActivity.this, "Complete the info!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.i(TAG, "onClick: " + strLocation);
+                    String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                    rootNode = FirebaseDatabase.getInstance();
+                    dangerReference = rootNode.getReference("Danger");
+                    userReference = rootNode.getReference("Users");
+
+                    Random random = new Random();
+                    IdGenerator idGenerator = new IdGenerator(random);
+                    String danger_id = idGenerator.nextId();
+                    DangerHelperClass dangerClass = new DangerHelperClass(strTime, strDescript, strLocation);
+                    DangerList dangerList = new DangerList();
+
+                    dangerList.PushDanger(danger_id);
+                    dangerReference.child(danger_id).setValue(dangerClass);
+
+
+                    userReference.child(user_id).child("dangers").child(danger_id).setValue(true);
+
+
+                }
+
+            }
+
+        });
+
+        mProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PostDangerActivity.this, ProfileActivity.class);
                 startActivity(intent);
-                finish();
                 return;
             }
         });
 
-      //  --------- TODO --------
-//        mSubmit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String strLocation = mLocation.getText().toString();
-//                String strTime = mLocation.getText().toString();
-//                String strDescript = mDescription.getText().toString();
-//
-//                if(strLocation.replaceAll("//s", "" ).equalsIgnoreCase("")
-//                        || strTime.replaceAll("//s", "" ).equalsIgnoreCase("")
-//                        || strDescript.replaceAll("//s", "").equalsIgnoreCase("")){
-//                    Toast.makeText(PostDangerActivity.this, "Complete the info!", Toast.LENGTH_SHORT).show();
-//                }else{
-//                    String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Danger");
-//                    // ------------ save the data into firebase ----------
-//
-//
-//                }
-//
-//            }
-//        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent subintent) {
+        super.onActivityResult(requestCode, resultCode, subintent);
+        Log.i(TAG, "onActivityResult: caled");
+        if(resultCode == RESULT_OK) {
+            Bundle extras = subintent.getExtras();
+            double[] selectedLocation = extras.getDoubleArray("SelectedLocation");
+            Log.i(TAG, "onActivityResult: " + Arrays.toString(selectedLocation));
+            Toast.makeText(this, "Selected Location successfully!", Toast.LENGTH_SHORT).show();
+
+            Geocoder geocoder = new Geocoder(this);
+            try {
+                List<Address> addresses = geocoder.getFromLocation(selectedLocation[0], selectedLocation[1], 1);
+                String selectedAddress = addresses.get(0).getAddressLine(0);
+                mLocation.setText(selectedAddress);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.i(TAG, "Get Address failed");
+            }
+
+        }
+
     }
 }

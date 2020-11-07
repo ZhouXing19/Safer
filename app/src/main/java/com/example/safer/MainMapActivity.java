@@ -65,13 +65,14 @@ import java.util.List;
 public class MainMapActivity extends FragmentActivity implements OnMapReadyCallback{
 
     private GoogleMap mMap;
-    private FloatingActionButton postButton;
+    private FloatingActionButton postButton, profileBtn;
     Location mLastLocation;
     LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocationClient;
     private SupportMapFragment mapFragment;
     private LocationCallback mLocationCallback;
     private List<Polyline> polylines;
+    private final int REQUEST_CODE = 20;
     Marker mCurrLocationMarker;
 
     private static final String TAG = MainMapActivity.class.getSimpleName();
@@ -79,7 +80,7 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_map);
+        setContentView(R.layout.activity_main_map);
 
         polylines = new ArrayList<>();
 
@@ -91,13 +92,22 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
         mapFragment.getMapAsync(this);
 
         postButton = (FloatingActionButton) findViewById(R.id.postButoon);
+        profileBtn = (FloatingActionButton) findViewById(R.id.profileBtn);
+
+
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainMapActivity.this, PostDangerActivity.class);
                 startActivity(intent);
-                finish();
-                return;
+            }
+        });
+
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainMapActivity.this, ProfileActivity.class);
+                startActivity(intent);
             }
         });
 
