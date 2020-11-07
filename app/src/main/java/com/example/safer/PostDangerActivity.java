@@ -21,7 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 
 public class PostDangerActivity extends AppCompatActivity {
     public static final String TAG = "PostDangerActivity";
@@ -29,9 +33,14 @@ public class PostDangerActivity extends AppCompatActivity {
     private ImageView mBack;
     private TextView mPickFromMap;
     private EditText mTime, mLocation, mDescription;
-    private FloatingActionButton mSubmit;
+    private FloatingActionButton mPost;
 
     private final int REQUEST_CODE = 20;
+
+
+
+    FirebaseDatabase rootNode;
+    DatabaseReference dangerReference, userReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +52,7 @@ public class PostDangerActivity extends AppCompatActivity {
         mTime = (EditText) findViewById(R.id.time);
         mLocation = (EditText) findViewById(R.id.location);
         mDescription = (EditText) findViewById(R.id.descript);
-        mSubmit = (FloatingActionButton) findViewById(R.id.submitButton);
+        mPost = (FloatingActionButton) findViewById(R.id.postButton);
 
 
 
@@ -62,28 +71,46 @@ public class PostDangerActivity extends AppCompatActivity {
             }
         });
 
-      //  --------- TODO --------
-//        mSubmit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String strLocation = mLocation.getText().toString();
-//                String strTime = mLocation.getText().toString();
-//                String strDescript = mDescription.getText().toString();
-//
-//                if(strLocation.replaceAll("//s", "" ).equalsIgnoreCase("")
-//                        || strTime.replaceAll("//s", "" ).equalsIgnoreCase("")
-//                        || strDescript.replaceAll("//s", "").equalsIgnoreCase("")){
-//                    Toast.makeText(PostDangerActivity.this, "Complete the info!", Toast.LENGTH_SHORT).show();
-//                }else{
-//                    String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Danger");
-//                    // ------------ save the data into firebase ----------
-//
-//
-//                }
-//
-//            }
-//        });
+
+        mPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String strTime = mTime.getText().toString();
+                String strDescript = mDescription.getText().toString();
+                String strLocation = mLocation.getText().toString();
+
+                if (strLocation.replaceAll("//s", "").equalsIgnoreCase("")
+                        || strTime.replaceAll("//s", "").equalsIgnoreCase("")
+                        || strDescript.replaceAll("//s", "").equalsIgnoreCase("")) {
+                    Toast.makeText(PostDangerActivity.this, "Complete the info!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.i(TAG, "onClick: " + strLocation);
+                    String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                    rootNode = FirebaseDatabase.getInstance();
+                    dangerReference = rootNode.getReference("Danger");
+                    userReference = rootNode.getReference("Users");
+
+                    Random random = new Random();
+                    IdGenerator idGenerator = new IdGenerator(random);
+                    String danger_id = idGenerator.nextId();
+                    DangerHelperClass dangerClass = new DangerHelperClass(strTime, strDescript, strLocation);
+                    DangerList dangerList = new DangerList();
+
+                    dangerList.PushDanger(danger_id);
+                    dangerReference.child(danger_id).setValue(dangerClass);
+
+
+                    userReference.child(user_id).child("dangers").child(danger_id).setValue(true);
+
+
+                }
+
+            }
+
+        });
+
 
 
     }
