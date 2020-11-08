@@ -21,7 +21,8 @@ import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
     TextView usernameTv, emailTv;
-    FloatingActionButton logoutBtn;
+//    FloatingActionButton logoutBtn;
+    ExtendedFloatingActionButton logoutBtn;
     ImageView avatarIv;
 
 
@@ -32,7 +33,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         usernameTv = (TextView) findViewById(R.id.usernameTv);
         emailTv = (TextView) findViewById(R.id.emailTv);
-        logoutBtn = (FloatingActionButton) findViewById(R.id.logoutBtn);
+//        logoutBtn = (FloatingActionButton) findViewById(R.id.logoutBtn);
+        logoutBtn = (ExtendedFloatingActionButton) findViewById(R.id.logoutBtn);
         avatarIv = (ImageView) findViewById(R.id.avatarIv);
 
         GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
