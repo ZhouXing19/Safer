@@ -88,7 +88,6 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                         // do something here
                         intent = new Intent(MainMapActivity.this, DangerListActivity.class);
                         startActivity(intent);
-                        finish();
                         return true;
                     case R.id.action_map:
                         // do something here
@@ -97,7 +96,6 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                         // do something here
                         intent = new Intent(MainMapActivity.this, PostDangerActivity.class);
                         startActivity(intent);
-                        finish();
                         return true;
                     default: return true;
                 }
