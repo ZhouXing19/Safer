@@ -74,8 +74,6 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
     private List<Polyline> polylines;
     Marker mCurrLocationMarker;
 
-    private Button btnDangerList;
-
     private static final String TAG = MainMapActivity.class.getSimpleName();
 
     @Override
@@ -102,16 +100,6 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
                 return;
             }
         });
-
-//        btnDangerList = findViewById(R.id.btnDangerList);
-//        btnDangerList.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainMapActivity.this, DangerListActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
 
     }
 
