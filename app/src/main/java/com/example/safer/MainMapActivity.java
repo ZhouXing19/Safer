@@ -103,15 +103,15 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
             }
         });
 
-        btnDangerList = findViewById(R.id.btnDangerList);
-        btnDangerList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainMapActivity.this, DangerListActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        btnDangerList = findViewById(R.id.btnDangerList);
+//        btnDangerList.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainMapActivity.this, DangerListActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
 
     }
 
