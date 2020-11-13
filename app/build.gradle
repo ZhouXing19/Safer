@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,11 +39,14 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.android.support:multidex:1.0.3'
 
     implementation 'com.google.android.material:material:1.2.0-alpha01'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.firebase:firebase-storage:16.0.4'
+    implementation 'com.google.firebase:firebase-firestore:17.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
