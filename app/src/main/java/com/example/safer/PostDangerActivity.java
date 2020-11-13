@@ -1,10 +1,13 @@
 package com.example.safer;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
@@ -18,11 +21,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +45,12 @@ import java.util.Random;
 public class PostDangerActivity extends AppCompatActivity {
     public static final String TAG = "PostDangerActivity";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
+    private static final int PICK_FROM_MAP_REQUEST_CODE = 20;
+    private static final int POST_PHOTO_REQUEST_CODE = 33;
+
+    private String user_id = "";
+    private String danger_id = "";
+    private String imageUrl;
 
     private ImageView mBack;
     private TextView mPickFromMap;
@@ -44,11 +59,9 @@ public class PostDangerActivity extends AppCompatActivity {
     private ExtendedFloatingActionButton pictureBtn, videoBtn;
     private File photoFile;
     public String photoFileName = "photo.jpg";
+    public Bitmap takenImage;
 
-
-    private final int REQUEST_CODE = 20;
-
-
+    private StorageReference mStorageRef;
 
     FirebaseDatabase rootNode;
     DatabaseReference dangerReference, userReference;
@@ -67,6 +80,11 @@ public class PostDangerActivity extends AppCompatActivity {
         pictureBtn = (ExtendedFloatingActionButton) findViewById(R.id.pictureBtn);
         videoBtn = (ExtendedFloatingActionButton) findViewById(R.id.videoBtn);
 
+        Random random = new Random();
+        IdGenerator idGenerator = new IdGenerator(random);
+        danger_id = idGenerator.nextId();
+
+        user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +97,7 @@ public class PostDangerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PostDangerActivity.this, PickLocationActivity.class);
-                startActivityForResult(intent, REQUEST_CODE);
+                startActivityForResult(intent, PICK_FROM_MAP_REQUEST_CODE);
             }
         });
 
@@ -98,16 +116,13 @@ public class PostDangerActivity extends AppCompatActivity {
                     Toast.makeText(PostDangerActivity.this, "Complete the info!", Toast.LENGTH_SHORT).show();
                 } else {
                     Log.i(TAG, "onClick: " + strLocation);
-                    String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
                     rootNode = FirebaseDatabase.getInstance();
                     dangerReference = rootNode.getReference("Danger");
                     userReference = rootNode.getReference("Users");
 
-                    Random random = new Random();
-                    IdGenerator idGenerator = new IdGenerator(random);
-                    String danger_id = idGenerator.nextId();
-                    DangerHelperClass dangerClass = new DangerHelperClass(strTime, strDescript, strLocation);
+                    DangerHelperClass dangerClass = new DangerHelperClass(strTime, strDescript, strLocation, imageUrl);
                     DangerList dangerList = new DangerList();
 
                     dangerList.PushDanger(danger_id);
@@ -150,6 +165,8 @@ public class PostDangerActivity extends AppCompatActivity {
         }
     }
 
+
+
     // Returns the File for a photo stored on disk given the fileName
     public File getPhotoFileUri(String fileName) {
         // Get safe storage directory for photos
@@ -174,24 +191,81 @@ public class PostDangerActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent subintent) {
         super.onActivityResult(requestCode, resultCode, subintent);
         Log.i(TAG, "onActivityResult: caled");
-        if(resultCode == RESULT_OK) {
-            Bundle extras = subintent.getExtras();
-            double[] selectedLocation = extras.getDoubleArray("SelectedLocation");
-            Log.i(TAG, "onActivityResult: " + Arrays.toString(selectedLocation));
-            Toast.makeText(this, "Selected Location successfully!", Toast.LENGTH_SHORT).show();
 
-            Geocoder geocoder = new Geocoder(this);
-            try {
-                List<Address> addresses = geocoder.getFromLocation(selectedLocation[0], selectedLocation[1], 1);
-                String selectedAddress = addresses.get(0).getAddressLine(0);
-                mLocation.setText(selectedAddress);
+        if (requestCode == PICK_FROM_MAP_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Bundle extras = subintent.getExtras();
+                double[] selectedLocation = extras.getDoubleArray("SelectedLocation");
+                Log.i(TAG, "onActivityResult: " + Arrays.toString(selectedLocation));
+                Toast.makeText(this, "Selected Location successfully!", Toast.LENGTH_SHORT).show();
 
-            } catch (IOException e) {
-                e.printStackTrace();
-                Log.i(TAG, "Get Address failed");
+                Geocoder geocoder = new Geocoder(this);
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(selectedLocation[0], selectedLocation[1], 1);
+                    String selectedAddress = addresses.get(0).getAddressLine(0);
+                    mLocation.setText(selectedAddress);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.i(TAG, "Get Address failed");
+                }
+
             }
-
         }
+
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                // by this point we have the camera photo on disk
+                takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                Log.i(TAG, "onActivityResult: CAPTURE_IMAGE_ACTIVITY back");
+                Intent intent = new Intent(PostDangerActivity.this, CapturePhotoActivity.class);
+                // Pass the image to the new intent
+                intent.putExtra("takenImagePath", photoFile.getAbsolutePath());
+                startActivityForResult(intent, POST_PHOTO_REQUEST_CODE);
+            } else { // Result was a failure
+                Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        if (requestCode == POST_PHOTO_REQUEST_CODE){
+            if(resultCode == RESULT_OK){
+                mStorageRef = FirebaseStorage.getInstance().getReference();
+                Uri photoUri = Uri.fromFile(photoFile);
+                StorageReference imageRef = mStorageRef.child("Safer/images/" + user_id + "/" + danger_id + "_0.jpg");
+
+                imageRef.putFile(photoUri)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                if (taskSnapshot.getMetadata() != null) {
+                                    if (taskSnapshot.getMetadata().getReference() != null) {
+                                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                // Get a URL to the uploaded content
+                                                imageUrl = uri.toString();
+                                                Log.i(TAG, "onSuccess: saved image to url: " + imageUrl);
+                                            }
+                                        });
+                                    }
+                                }
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(PostDangerActivity.this, "Failed to save to cloud: "+ e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+            }
+        }
+
+
+
 
     }
 }

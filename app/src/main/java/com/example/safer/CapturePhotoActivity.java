@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,7 +42,7 @@ public class CapturePhotoActivity extends AppCompatActivity {
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
     File photoFile;
-
+    String takenImagePath;
     Uri imageUri;
     String myUri = "";
 
@@ -75,84 +77,34 @@ public class CapturePhotoActivity extends AppCompatActivity {
         postTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadImage();
+                Toast.makeText(CapturePhotoActivity.this, "Should post!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        CropImage.activity()
-                .setAspectRatio(1, 1)
-                .start(CapturePhotoActivity.this);
+        Intent intent = getIntent();
 
-    }
-
-    private String getFileExtension(Uri uri){
-
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return  mime.getExtensionFromMimeType(contentResolver.getType(uri));
-    }
-
-    private void uploadImage(){
-        if (imageUri != null){
-            final StorageReference fileReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
-            uploadTask = fileReference.putFile(imageUri);
-            uploadTask.continueWithTask(new Continuation() {
-                @Override
-                public Object then(@NonNull Task task) throws Exception {
-                    if (!task.isSuccessful()){
-                        throw task.getException();
-                    }
-                    return fileReference.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()){
-                        Uri downloadUri = task.getResult();
-                        myUri = downloadUri.toString();
-
-                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
-
-                        String postId = reference.push().getKey();
-                        HashMap<String, Object> hashMap = new HashMap<>();
-                        hashMap.put("postId", postId);
-                        hashMap.put("postImage", myUri);
-                        hashMap.put("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
-
-                        reference.child(postId).setValue(hashMap);
-
-                        Intent intent = new Intent(CapturePhotoActivity.this, MainMapActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(CapturePhotoActivity.this, "Failed in UploadImage", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.e(TAG, "onFailure: " + e.getMessage());
-                    Toast.makeText(CapturePhotoActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+        takenImagePath = intent.getStringExtra("takenImagePath");
+        if (takenImagePath != null){
+            imageIv.setImageBitmap(BitmapFactory.decodeFile(takenImagePath));
         } else {
-            Toast.makeText(this, "No image selected!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Taken Image is not passed to CapturePhotoActivity", Toast.LENGTH_SHORT).show();
         }
+
+//        CropImage.activity()
+//                .setAspectRatio(1, 1)
+//                .start(CapturePhotoActivity.this);
+
+        postTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(CapturePhotoActivity.this, "Image Confirmed", Toast.LENGTH_SHORT).show();
+                Intent data = new Intent();
+                setResult(RESULT_OK, data);
+                finish();
+            }
+        });
+
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            imageUri = result.getUri();
-
-            imageIv.setImageURI(imageUri);
-        } else {
-            Toast.makeText(this, "Wrong in CapturePhotoActivity", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(CapturePhotoActivity.this, PostDangerActivity.class));
-            finish();
-        }
-    }
 }
