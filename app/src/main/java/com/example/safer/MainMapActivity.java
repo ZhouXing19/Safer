@@ -2,7 +2,6 @@ package com.example.safer;
 
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,19 +13,12 @@ import android.os.Looper;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.firebase.geofire.GeoFire;
-import com.firebase.geofire.GeoLocation;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApi;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
@@ -34,14 +26,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -49,23 +39,17 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
-import android.graphics.Point;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 import android.widget.Toast;
 
-import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainMapActivity extends FragmentActivity implements OnMapReadyCallback{
+public class MainMapActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     private GoogleMap mMap;
-    private FloatingActionButton postButton, profileBtn;
     Location mLastLocation;
     LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -74,6 +58,8 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
     private List<Polyline> polylines;
     private final int REQUEST_CODE = 20;
     Marker mCurrLocationMarker;
+
+    private BottomNavigationView bottomNavigationView;
 
     private static final String TAG = MainMapActivity.class.getSimpleName();
 
@@ -91,27 +77,31 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        postButton = (FloatingActionButton) findViewById(R.id.postButoon);
-        profileBtn = (FloatingActionButton) findViewById(R.id.profileBtn);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.action_map);
 
-
-        postButton.setOnClickListener(new View.OnClickListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainMapActivity.this, PostDangerActivity.class);
-                startActivity(intent);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
+                switch (item.getItemId()) {
+                    case R.id.action_danger_list:
+                        // do something here
+                        intent = new Intent(MainMapActivity.this, DangerListActivity.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.action_map:
+                        // do something here
+                        return true;
+                    case R.id.action_post_danger:
+                        // do something here
+                        intent = new Intent(MainMapActivity.this, PostDangerActivity.class);
+                        startActivity(intent);
+                        return true;
+                    default: return true;
+                }
             }
         });
-
-        profileBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainMapActivity.this, ProfileActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
     }
 
     @Override

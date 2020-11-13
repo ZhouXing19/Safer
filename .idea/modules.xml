@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Safer.iml" filepath="$PROJECT_DIR$/.idea/modules/Safer.iml" group="Safer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Safer-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Safer-app.iml" group="Safer/app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="Safer/app" />
     </modules>
   </component>
