@@ -36,9 +36,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 
@@ -47,18 +45,22 @@ public class PostDangerActivity extends AppCompatActivity {
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
     private static final int PICK_FROM_MAP_REQUEST_CODE = 20;
     private static final int POST_PHOTO_REQUEST_CODE = 33;
+    private static final int POST_VIDEO_REQUEST_CODE = 34;
+    private static final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 55;
 
     private String user_id = "";
     private String danger_id = "";
-    private String imageUrl;
+    private String imageUrl, videoUrl;
 
     private ImageView mBack;
     private TextView mPickFromMap;
     private EditText mTime, mLocation, mDescription;
     private FloatingActionButton mPost;
     private ExtendedFloatingActionButton pictureBtn, videoBtn;
-    private File photoFile;
+    private File photoFile, videoFile;
+    private Uri videoUri;
     public String photoFileName = "photo.jpg";
+    public String videoFileName = "video.mp4";
     public Bitmap takenImage;
 
     private StorageReference mStorageRef;
@@ -141,15 +143,30 @@ public class PostDangerActivity extends AppCompatActivity {
             }
         });
 
+        videoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchVideoCamera();
+            }
+        });
 
+    }
 
+    private void launchVideoCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        videoFile = getPhotoFileUri(videoFileName, "video");
+        Uri fileProvider = FileProvider.getUriForFile(PostDangerActivity.this, "com.example.safer", videoFile);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE);
+        }
     }
 
     private void launchCamera() {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create a File reference for future access
-        photoFile = getPhotoFileUri(photoFileName);
+        photoFile = getPhotoFileUri(photoFileName, "image");
 
         // wrap File object into a content provider
         // required for API >= 24
@@ -168,11 +185,21 @@ public class PostDangerActivity extends AppCompatActivity {
 
 
     // Returns the File for a photo stored on disk given the fileName
-    public File getPhotoFileUri(String fileName) {
+    public File getPhotoFileUri(String fileName, String mediaType) {
         // Get safe storage directory for photos
         // Use `getExternalFilesDir` on Context to access package-specific directories.
         // This way, we don't need to request external read/write runtime permissions.
-        File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), TAG);
+        File mediaStorageDir;
+        switch (mediaType) {
+            case "image":
+                mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), TAG);
+            case "video":
+                mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_MOVIES), TAG);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + mediaType);
+        }
+
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
@@ -215,20 +242,6 @@ public class PostDangerActivity extends AppCompatActivity {
 
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                // by this point we have the camera photo on disk
-                takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-                Log.i(TAG, "onActivityResult: CAPTURE_IMAGE_ACTIVITY back");
-                Intent intent = new Intent(PostDangerActivity.this, CapturePhotoActivity.class);
-                // Pass the image to the new intent
-                intent.putExtra("takenImagePath", photoFile.getAbsolutePath());
-                startActivityForResult(intent, POST_PHOTO_REQUEST_CODE);
-            } else { // Result was a failure
-                Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        if (requestCode == POST_PHOTO_REQUEST_CODE){
-            if(resultCode == RESULT_OK){
                 mStorageRef = FirebaseStorage.getInstance().getReference();
                 Uri photoUri = Uri.fromFile(photoFile);
                 StorageReference imageRef = mStorageRef.child("Safer/images/" + user_id + "/" + danger_id + "_0.jpg");
@@ -247,24 +260,64 @@ public class PostDangerActivity extends AppCompatActivity {
                                                 // Get a URL to the uploaded content
                                                 imageUrl = uri.toString();
                                                 Log.i(TAG, "onSuccess: saved image to url: " + imageUrl);
+                                                Toast.makeText(PostDangerActivity.this, "Picture Taken!", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                     }
                                 }
-
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(PostDangerActivity.this, "Failed to save to cloud: "+ e.getMessage(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(PostDangerActivity.this, "Failed to save image to cloud: "+ e.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
 
+            } else { // Result was a failure
+                Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
 
 
+        if (requestCode == CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE){
+            if (requestCode == RESULT_OK){
+                videoUri = subintent.getData();
+                mStorageRef = FirebaseStorage.getInstance().getReference();
+
+                StorageReference videoRef = mStorageRef.child("Safer/video/" + user_id + "/" + danger_id + "_0.mp4");
+
+                videoRef.putFile(videoUri)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                if (taskSnapshot.getMetadata() != null) {
+                                    if (taskSnapshot.getMetadata().getReference() != null) {
+                                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                // Get a URL to the uploaded content
+                                                videoUrl = uri.toString();
+                                                Log.i(TAG, "onSuccess: saved video to url: " + videoUrl);
+                                                Toast.makeText(PostDangerActivity.this, "Video uploaded!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(PostDangerActivity.this, "Failed to save video to cloud: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+            } else {
+                Toast.makeText(this, "Fail to take video", Toast.LENGTH_SHORT).show();
+            }
+        }
 
 
     }
