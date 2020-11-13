@@ -60,12 +60,17 @@
         android:textColor="@android:color/white"
         android:elevation="10dp"
         android:textAlignment="center"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/bottom_navigation"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         />
 
-
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/menu_bottom_navigation" />
 
 
 </RelativeLayout>
