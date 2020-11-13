@@ -2,4 +2,5 @@
     <string name="app_name">Safer</string>
     <string name="title_activity_driver_map">Map</string>
     <string name="title_activity_pick_location">Map</string>
+    <string name="log_out">Log out</string>
 </resources>

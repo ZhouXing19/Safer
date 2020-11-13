@@ -56,6 +56,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
     private SupportMapFragment mapFragment;
     private LocationCallback mLocationCallback;
     private List<Polyline> polylines;
+    private final int REQUEST_CODE = 20;
     Marker mCurrLocationMarker;
 
     private BottomNavigationView bottomNavigationView;
@@ -65,7 +66,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_map);
+        setContentView(R.layout.activity_main_map);
 
         polylines = new ArrayList<>();
 
