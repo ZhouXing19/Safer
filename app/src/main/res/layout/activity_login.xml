@@ -43,18 +43,20 @@
         android:layout_alignLeft="@id/email"
         />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/login"
-        android:layout_width="162dp"
+        android:theme="@style/MyMaterialTheme"
+        android:layout_width="wrap_content"
         android:layout_height="53dp"
         android:layout_below="@id/password"
         android:layout_marginTop="20dp"
         android:text="login"
         android:textSize="20dp"
+        android:textAlignment="center"
         android:fontFamily="@font/light"
         android:textColor="@android:color/white"
         android:layout_alignLeft="@id/password"
-        android:background="@drawable/buttonred"/>
+        app:backgroundTint="@color/danganRed"/>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/googleSignIn"
@@ -80,7 +82,6 @@
         />
 
     <Button
-
         android:id="@+id/registration"
         android:layout_width="130dp"
         android:layout_height="match_parent"
