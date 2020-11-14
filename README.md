@@ -7,10 +7,6 @@ CodePath Android University Group Project
 1. [Overview](#Overview)
 1. [Product Spec](#Product-Spec)
 1. [Wireframes](#Wireframes)
-1. [Technology] (#Technology)
-1. [Preview] (#Preview)
-1. [Environment] (#Environment)
-1. [Progress] (#Progress)
 
 ## Overview
 ### Description
