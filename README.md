@@ -7,20 +7,22 @@ CodePath Android University Group Project
 1. [Overview](#Overview)
 1. [Product Spec](#Product-Spec)
 1. [Wireframes](#Wireframes)
-2. [Schema](#Schema)
+1. [Technology] (#Technology)
+1. [Preview] (#Preview)
+1. [Environment] (#Environment)
+1. [Progress] (#Progress)
 
 ## Overview
 ### Description
-An android navigation app where users can share and view dangers nearby. The app will also guide you to the nearest security help in Hyde Park Region in Chicago, IL.
+An android navigation app where users can share and view dangers nearby in Hyde Park Region in Chicago, IL.
 
 ### App Evaluation
-[Evaluation of your app across the following attributes]
-- **Category:**
-- **Mobile:**
-- **Story:**
-- **Market:**
-- **Habit:**
-- **Scope:**
+- **Category:** Safety
+- **Mobile:** This application will be a mobile solution.
+- **Story:** Students and local residents are now aware of crimes or dangers nearby. They have more control over their own safety.
+- **Market:** This app will be primarily targeted towards students that attend college.
+- **Habit:** Students will most likely use this app at night if they are walking alone, or during the day when they are notified of a nearby danger.
+- **Scope:** This project will enable students to see nearby dangers and be able to alert others of dangers they have noticed.
 
 ## Product Spec
 
@@ -28,55 +30,67 @@ An android navigation app where users can share and view dangers nearby. The app
 
 **Required Must-have Stories**
 
-* [fill in your required user stories here]
-* ...
+* Users can log in to post a danger notice
+* All nearby dangers are displayed on a map
+* An aggregated list of dangers can be viewed
+* Each danger has a detailed page with the respective image or video
 
 **Optional Nice-to-have Stories**
 
-* [fill in your required user stories here]
-* ...
+* Navigation to safe locations such as police stations, hospitals, or other shelters
 
 ### 2. Screen Archetypes
 
-* [list first screen here]
-   * [list associated required story here]
-   * ...
-* [list second screen here]
-   * [list associated required story here]
-   * ...
+* Login Page
+   * Map with pinned danger locations
+   * Filter/Toggle danger types
+* Main Activity Page/Map
+   * Map with pinned danger locations
+   * Filter/Toggle danger types
+* Danger Posting Page
+   * Address autocompletion
+   * Get address by pin on map
+   * Latitude/Longitude information
+   * Post Pictures and Videos
+   * Post with categories
+* Danger Viewing Page
+   * Recycler view, with each row showing address, time, description
+* Danger Detail Viewing Page
+   * Imageview / videoview
+   * Description view
+   * Comment view
+   * Comment input
 
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
 
-* [fill out your first tab]
-* [fill out your second tab]
-* [fill out your third tab]
+* Map
+* Post Danger
+* Nearby Dangers
 
 **Flow Navigation** (Screen to Screen)
 
-* [list first screen here]
-   * [list screen navigation here]
-   * ...
-* [list second screen here]
-   * [list screen navigation here]
-   * ...
+* Welcome Page
+   * Main Map Page
+* Main Map Page
+   * Nearby Danger Page
+   * Post Danger Page (logged in)
+   * Login Page/Register Page
+* Nearby Danger Page
+   * Danger Details Page
+* Danger Details Page
+   * Edit Danger Page
+* Post Danger Page
+   * Danger Details Page
 
 ## Wireframes
-<img src="design/paper_mockup.png" width=600>
+<img src="design/paper_mockup.png" width=800>
 
 ### [BONUS] Digital Wireframes & Mockups
 [Digital Wireframe] https://github.com/ZhouXing19/Safer/tree/master/design/digital_wireframe.pdf
 ### [BONUS] Interactive Prototype
-<img src="design/mockup_walkthrough.gif" width=600>
-## Schema
-[This section will be completed in Unit 9]
-### Models
-[Add table of models]
-### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+<img src="design/mockup_walkthrough.gif" width=200>
 
 ## Technology
 - Java
@@ -92,8 +106,8 @@ An android navigation app where users can share and view dangers nearby. The app
 - Tested in Pixel 2 API 30
 - A [fake location simulator](https://play.google.com/store/apps/details?id=com.lexa.fakegps&hl=en_US&gl=US) is needed in the AVD
 
-## Implemented Functions
-
+## Progress
+### Implemented Functions
 - User sign up
 - User sign in
 - Map interface
@@ -101,6 +115,6 @@ An android navigation app where users can share and view dangers nearby. The app
 - "Submit danger nearby" page
 - "Pick a location from map" page (developing)
 
-## TO-DO
+### TO-DO
 - `PickLocationActivity.java`, complete the location acquisition function on click.
 - `PostDangerActivity.java`, change the address that user inputs into lat-lang, and save in DB.
