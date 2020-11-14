@@ -7,10 +7,7 @@ import androidx.core.content.FileProvider;
 
 import android.content.Context;
 import android.content.Intent;
-<<<<<<< HEAD
 import android.content.pm.PackageManager;
-=======
->>>>>>> 1e5c8f60b6c444ac2e8ff51a6fb118de64547ddd
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Address;
@@ -49,11 +46,8 @@ public class PostDangerActivity extends AppCompatActivity {
     public static final String TAG = "PostDangerActivity";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
     private static final int PICK_FROM_MAP_REQUEST_CODE = 20;
-<<<<<<< HEAD
-=======
     private static final int POST_PHOTO_REQUEST_CODE = 33;
     private static final int POST_VIDEO_REQUEST_CODE = 34;
->>>>>>> 1e5c8f60b6c444ac2e8ff51a6fb118de64547ddd
     private static final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 55;
 
     private String user_id = "";
@@ -161,7 +155,6 @@ public class PostDangerActivity extends AppCompatActivity {
     }
 
     private void launchVideoCamera() {
-<<<<<<< HEAD
             Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
             videoFile = getFileUri(videoFileName, "video");
             Uri fileProvider = FileProvider.getUriForFile(PostDangerActivity.this, "com.example.safer", videoFile);
@@ -174,27 +167,26 @@ public class PostDangerActivity extends AppCompatActivity {
         }
     }
 
-    private void launchCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        // Create a File reference for future access
-        photoFile = getFileUri(photoFileName, "image");
-
-        // wrap File object into a content provider
-        // required for API >= 24
-        // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
-        Uri fileProvider = FileProvider.getUriForFile(PostDangerActivity.this, "com.example.safer", photoFile);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
-
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-        }
-    }
+//    private void launchCamera() {
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//
+//        // Create a File reference for future access
+//        photoFile = getFileUri(photoFileName, "image");
+//
+//        // wrap File object into a content provider
+//        // required for API >= 24
+//        // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
+//        Uri fileProvider = FileProvider.getUriForFile(PostDangerActivity.this, "com.example.safer", photoFile);
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
+//
+//        if (intent.resolveActivity(getPackageManager()) != null) {
+//            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+//        }
+//    }
 
 
     // Returns the File for a photo stored on disk given the fileName
     public File getFileUri(String fileName, String mediaType) {
-=======
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         videoFile = getPhotoFileUri(videoFileName, "video");
         Uri fileProvider = FileProvider.getUriForFile(PostDangerActivity.this, "com.example.safer", videoFile);
@@ -202,6 +194,9 @@ public class PostDangerActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(intent, CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE);
         }
+        // FIXME
+        File file = new File(fileName);
+        return file;
     }
 
     private void launchCamera() {
@@ -228,46 +223,26 @@ public class PostDangerActivity extends AppCompatActivity {
 
     // Returns the File for a photo stored on disk given the fileName
     public File getPhotoFileUri(String fileName, String mediaType) {
->>>>>>> 1e5c8f60b6c444ac2e8ff51a6fb118de64547ddd
         // Get safe storage directory for photos
         // Use `getExternalFilesDir` on Context to access package-specific directories.
         // This way, we don't need to request external read/write runtime permissions.
         File mediaStorageDir;
-<<<<<<< HEAD
-        switch (mediaType){
-            case "image":
-                mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), TAG);
-                break;
-=======
         switch (mediaType) {
             case "image":
                 mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), TAG);
->>>>>>> 1e5c8f60b6c444ac2e8ff51a6fb118de64547ddd
             case "video":
                 mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_MOVIES), TAG);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + mediaType);
         }
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 1e5c8f60b6c444ac2e8ff51a6fb118de64547ddd
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
             Log.d(TAG, "failed to create directory");
         }
-<<<<<<< HEAD
         // Return the file target for the photo based on filename
         File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
-        // /storage/emulated/0/Android/data/com.example.safer/files/Pictures/PostDangerActivity/photo.jpg
-=======
-
-        // Return the file target for the photo based on filename
-        File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
-
->>>>>>> 1e5c8f60b6c444ac2e8ff51a6fb118de64547ddd
         return file;
     }
 
@@ -340,11 +315,7 @@ public class PostDangerActivity extends AppCompatActivity {
 
 
         if (requestCode == CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE){
-<<<<<<< HEAD
-            if (resultCode == RESULT_OK){
-=======
             if (requestCode == RESULT_OK){
->>>>>>> 1e5c8f60b6c444ac2e8ff51a6fb118de64547ddd
                 videoUri = subintent.getData();
                 mStorageRef = FirebaseStorage.getInstance().getReference();
 
