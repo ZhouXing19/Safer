@@ -98,6 +98,10 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                         intent = new Intent(MainMapActivity.this, PostDangerActivity.class);
                         startActivity(intent);
                         return true;
+                    case R.id.action_profile:
+                        intent = new Intent(MainMapActivity.this, ProfileActivity.class);
+                        startActivity(intent);
+                        return true;
                     default: return true;
                 }
             }
