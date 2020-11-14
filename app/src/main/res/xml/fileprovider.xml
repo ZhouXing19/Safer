@@ -2,8 +2,9 @@
 <paths>
     <!-- See table below.  The external-files-path DOES NOT require external storage permissions. -->
     <external-files-path
-        name="images"
-        path="Pictures" />
+        name="images"  path="Pictures" />
+    <external-files-path
+        name="videos" path="Movies" />
 
     <!--Uncomment below to share the entire application specific directory -->
     <!--<external-path name="all_dirs" path="."/>-->
