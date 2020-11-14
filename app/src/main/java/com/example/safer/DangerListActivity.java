@@ -61,6 +61,10 @@ public class DangerListActivity extends AppCompatActivity {
                         intent = new Intent(DangerListActivity.this, PostDangerActivity.class);
                         startActivity(intent);
                         return true;
+                    case R.id.action_profile:
+                        intent = new Intent(DangerListActivity.this, ProfileActivity.class);
+                        startActivity(intent);
+                        return true;
                     default: return true;
                 }
             }

@@ -22,6 +22,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText mEmail, mPassword;
     private TextView mRegister;
-    private Button mLogin;
+    private ExtendedFloatingActionButton mLogin;
     private ImageView mBack;
     private SignInButton googleSignInBtn;
     private final static int RC_SIGN_IN = 123;
@@ -52,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mEmail = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
-        mLogin = (Button) findViewById(R.id.login);
+        mLogin = (ExtendedFloatingActionButton) findViewById(R.id.login);
         mRegister = (TextView) findViewById(R.id.registration);
         mBack = (ImageView) findViewById(R.id.back);
         googleSignInBtn = (SignInButton) findViewById(R.id.googleSignIn);
