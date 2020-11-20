@@ -67,8 +67,21 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="-14dp"
         tools:text="The driver kept going north on Morgan, slamming into a tree and knocking down a light pole, then running onto the Dan Ryan Expressway on foot, later trying to get away on public transportation." />
+
+    <VideoView
+        android:id="@+id/vvDanger"
+        android:layout_width="350dp"
+        android:layout_height="250dp"
+        android:layout_alignBottom="@id/tvDescription"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="-64dp" />
 
 </RelativeLayout>

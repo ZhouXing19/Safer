@@ -92,4 +92,16 @@ public class DangerAdapter extends RecyclerView.Adapter<DangerAdapter.ViewHolder
             Glide.with(context).load(danger.getImgUrl()).into(ivDanger);
         }
     }
+
+    // Clean all elements of the recycler
+    public void clear() {
+        dangers.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(ArrayList<Danger> list) {
+        dangers.addAll(list);
+        notifyDataSetChanged();
+    }
 }

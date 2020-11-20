@@ -3,10 +3,13 @@ package com.example.safer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.example.safer.models.Danger;
@@ -53,5 +56,19 @@ public class DangerDetailActivity extends AppCompatActivity {
         tvAddress.setText(danger.getAddress());
         tvDescription.setText(danger.getDescription());
         Glide.with(this).load(danger.getImgUrl()).into(ivDanger);
+
+        // video
+        final VideoView mVideoView = (VideoView) findViewById(R.id.vvDanger);
+        mVideoView.setVideoPath("http://techslides.com/demos/sample-videos/small.mp4");
+        MediaController mediaController = new MediaController(this);
+        mediaController.setAnchorView(mVideoView);
+        mVideoView.setMediaController(mediaController);
+        mVideoView.requestFocus();
+        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            // Close the progress bar and play the video
+            public void onPrepared(MediaPlayer mp) {
+                mVideoView.start();
+            }
+        });
     }
 }
