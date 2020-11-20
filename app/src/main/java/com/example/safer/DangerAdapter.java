@@ -4,27 +4,30 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.safer.models.Danger;
 
 import java.util.ArrayList;
 
 public class DangerAdapter extends RecyclerView.Adapter<DangerAdapter.ViewHolder> {
 
+    Context context;
     private ArrayList<Danger> dangers;
 
-    public DangerAdapter(ArrayList<Danger> dangers) {
+    public DangerAdapter(Context context, ArrayList<Danger> dangers) {
+        this.context = context;
         this.dangers = dangers;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
@@ -41,6 +44,7 @@ public class DangerAdapter extends RecyclerView.Adapter<DangerAdapter.ViewHolder
 
         holder.tvTitle.setText(danger.getTitle());
         holder.tvDescription.setText(danger.getDescription());
+        holder.bind(danger);
     }
 
     @Override
@@ -55,6 +59,7 @@ public class DangerAdapter extends RecyclerView.Adapter<DangerAdapter.ViewHolder
         // for any view that will be set as you render a row
         public TextView tvTitle;
         public TextView tvDescription;
+        public ImageView ivDanger;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -65,6 +70,13 @@ public class DangerAdapter extends RecyclerView.Adapter<DangerAdapter.ViewHolder
 
             tvTitle = (TextView) itemView.findViewById(R.id.danger_title);
             tvDescription = (TextView) itemView.findViewById(R.id.danger_description);
+            ivDanger = (ImageView) itemView.findViewById(R.id.danger_image);
+        }
+
+        public void bind(Danger danger) {
+            tvTitle.setText(danger.getTitle());
+            tvDescription.setText(danger.getDescription());
+            Glide.with(context).load(danger.getImgUrl()).into(ivDanger);
         }
     }
 }
