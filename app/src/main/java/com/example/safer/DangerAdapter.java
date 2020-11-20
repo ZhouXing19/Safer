@@ -1,6 +1,7 @@
 package com.example.safer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.safer.models.Danger;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 public class DangerAdapter extends RecyclerView.Adapter<DangerAdapter.ViewHolder> {
 
     Context context;
-    private ArrayList<Danger> dangers;
+    ArrayList<Danger> dangers;
+    static final String KEY_DANGER = "danger";
 
     public DangerAdapter(Context context, ArrayList<Danger> dangers) {
         this.context = context;
@@ -40,11 +44,20 @@ public class DangerAdapter extends RecyclerView.Adapter<DangerAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Danger danger = dangers.get(position);
+        final Danger danger = dangers.get(position);
 
         holder.tvTitle.setText(danger.getTitle());
         holder.tvDescription.setText(danger.getDescription());
         holder.bind(danger);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, DangerDetailActivity.class);
+                i.putExtra(KEY_DANGER, Parcels.wrap(danger));
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override

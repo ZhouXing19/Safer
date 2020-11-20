@@ -28,10 +28,11 @@ public class DangerListActivity extends AppCompatActivity {
 
         // TODO: add real data
         Danger temp = new Danger("robbery", "a student was approached by an armed individual",
-                "some user", 1604698894, "");
+                "some user", 1604698894, "", "466 Maple Street");
         dangers.add(temp);
         temp = new Danger("arrest", "man with gun arrested",
-                "some user", 1604698999, "");
+                "some user", 1604698999, "", "9999 King East Ave");
+        dangers.add(temp);
 
         // Lookup the recyclerview in activity layout
         RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rvDangers);
