@@ -58,7 +58,7 @@ public class DangerListActivity extends AppCompatActivity {
                 // once the network request has completed successfully.
 
                 // TODO
-                adapter.clear();
+//                adapter.clear();
 
                 Danger temp = new Danger("more data", "a student was approached by an armed individual",
                         "some user", 1604698894, "", "466 Maple Street");
