@@ -22,19 +22,19 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - **Scope:** This project will enable students to see nearby dangers and be able to alert others of dangers they have noticed.
 
 ## Unit 9: Milestone Deliverables
-[X] Updated README with Schema Section - Check out an EXAMPLE README
-[X] Data Models (3pts)
-[X] Networking (2pts)
-[X] Sprint Plan in place using GitHub project management flow.
-[X] GitHub Project created (1pt)
-[X] GitHub Milestones created (1pt)
-[X] GitHub Issues created from user stories (2pts)
-[X] Issues added to project and assigned to specific team members (1pt)
+- [X] Updated README with Schema Section - Check out an EXAMPLE README
+- [X] Data Models (3pts)
+- [X] Networking (2pts)
+- [X] Sprint Plan in place using GitHub project management flow.
+- [X] GitHub Project created (1pt)
+- [X] GitHub Milestones created (1pt)
+- [X] GitHub Issues created from user stories (2pts)
+- [X] Issues added to project and assigned to specific team members (1pt)
 
-### Updated status of issues
+### Trello: Milestones and Issues
 <img src="gifs/unit10/status_issues.png" width=400>
 
-### Sprint planned for next week
+### Trello: Sprint Plan and assigned team members
 <img src="gifs/unit10/planned_tasks.png" width=400>
 
 ### Lynn
@@ -123,7 +123,6 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 
 ## Schema 
 ### Models
-#### Post
 1. Danger Schema
 
    | Property      | Type     | Description |
