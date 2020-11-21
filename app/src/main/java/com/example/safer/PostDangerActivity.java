@@ -65,6 +65,8 @@ public class PostDangerActivity extends AppCompatActivity {
     public String videoFileName = "video.mp4";
     public Bitmap takenImage;
 
+    private double pickedLat, pickedLng;
+
     private StorageReference mStorageRef;
 
     FirebaseDatabase rootNode;
@@ -116,8 +118,6 @@ public class PostDangerActivity extends AppCompatActivity {
                 String title = "";
                 String category = "";
                 String userid = "";
-                double longitude = 0.0;
-                double latitude = 0.0;
 
                 if (strLocation.replaceAll("//s", "").equalsIgnoreCase("")
                         || strTime.replaceAll("//s", "").equalsIgnoreCase("")
@@ -126,12 +126,19 @@ public class PostDangerActivity extends AppCompatActivity {
                 } else {
                     Log.i(TAG, "onClick: " + strLocation);
 
-
                     rootNode = FirebaseDatabase.getInstance();
                     dangerReference = rootNode.getReference("Danger");
                     userReference = rootNode.getReference("Users");
 
-                    DangerHelperClass dangerClass = new DangerHelperClass(strTime, strDescript, strLocation, imageUrl, category, title, userid, latitude, longitude);
+                    DangerHelperClass dangerClass = new DangerHelperClass(strTime,
+                                                                          strDescript,
+                                                                          strLocation,
+                                                                          imageUrl,
+                                                                          category,
+                                                                          title,
+                                                                          userid,
+                                                                          pickedLat,
+                                                                          pickedLng);
                     DangerList dangerList = new DangerList();
 
                     dangerList.PushDanger(danger_id);
@@ -229,6 +236,8 @@ public class PostDangerActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Bundle extras = subintent.getExtras();
                 double[] selectedLocation = extras.getDoubleArray("SelectedLocation");
+                pickedLat = selectedLocation[0];
+                pickedLng = selectedLocation[1];
                 Log.i(TAG, "onActivityResult: " + Arrays.toString(selectedLocation));
                 Toast.makeText(this, "Selected Location successfully!", Toast.LENGTH_SHORT).show();
 
