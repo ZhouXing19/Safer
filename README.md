@@ -20,16 +20,32 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - **Habit:** Students will most likely use this app at night if they are walking alone, or during the day when they are notified of a nearby danger.
 - **Scope:** This project will enable students to see nearby dangers and be able to alert others of dangers they have noticed.
 
+## Milestone Deliverables
+1. [X] Updated status of issues in Project board (2pts)
+<img src="gifs/unit10/status_issues.png" width=800>
+2. [X] Sprint planned for next week (Issues created, assigned & added to project board) (3pts)
+<img src="gifs/unit10/planned_tasks.png" width=800>
+3. [X] Completed user stories checked-off in README (2pts)
+4. [X] Gifs created to show build progress and added to README (3pts)
+### Lynn
+- RV Clickable cell + pull to refresh
+<img src="gifs/unit10/Lynn.gif" width=200>
+
+### Molly
+- Retrieve real time data from firebase
+- Display danger icon and floating window
+<img src="gifs/unit10/Molly.png" width=800>
+
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
 
-* Users can log in to post a danger notice
-* All nearby dangers are displayed on a map
-* An aggregated list of dangers can be viewed
-* Each danger has a detailed page with the respective image or video
+- [X] Users can log in to post a danger notice
+- [ ] All nearby dangers are displayed on a map
+- [ ] An aggregated list of dangers can be viewed
+- [X] Each danger has a detailed page with the respective image or video
 
 **Optional Nice-to-have Stories**
 
@@ -94,9 +110,6 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - Firebase
 - Adobe XD for UI design
 - Joda Time (https://www.joda.org/joda-time/)
-
-## Preview
-<img src="preview_map.gif" height=370><br>
 
 ## Environment
 - Developed in AndroidStudio 4.0.1
