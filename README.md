@@ -43,7 +43,7 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 
 ### Zhou
 - Updated database schema: added entries for title, category and LatLng
-<img src="gifs/unit10/zhou.png" width=800>
+<img src="gifs/unit10/zhou.gif" width=800>
 
 ## Product Spec
 
