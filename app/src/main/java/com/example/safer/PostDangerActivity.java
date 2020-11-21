@@ -56,7 +56,7 @@ public class PostDangerActivity extends AppCompatActivity {
 
     private ImageView mBack;
     private TextView mPickFromMap;
-    private EditText mTime, mLocation, mDescription;
+    private EditText mTime, mLocation, mDescription, mCategory, mTitle;
     private FloatingActionButton mPost;
     private ExtendedFloatingActionButton pictureBtn, videoBtn;
     private File photoFile, videoFile;
@@ -82,9 +82,12 @@ public class PostDangerActivity extends AppCompatActivity {
         mTime = (EditText) findViewById(R.id.time);
         mLocation = (EditText) findViewById(R.id.location);
         mDescription = (EditText) findViewById(R.id.descript);
+        mCategory = (EditText) findViewById(R.id.category);
+        mTitle = (EditText) findViewById(R.id.titleEt);
         mPost = (FloatingActionButton) findViewById(R.id.postButton);
         pictureBtn = (ExtendedFloatingActionButton) findViewById(R.id.pictureBtn);
         videoBtn = (ExtendedFloatingActionButton) findViewById(R.id.videoBtn);
+
 
         Random random = new Random();
         IdGenerator idGenerator = new IdGenerator(random);
@@ -115,9 +118,8 @@ public class PostDangerActivity extends AppCompatActivity {
                 String strTime = mTime.getText().toString();
                 String strDescript = mDescription.getText().toString();
                 String strLocation = mLocation.getText().toString();
-                String title = "";
-                String category = "";
-                String userid = "";
+                String strTitle = mTitle.getText().toString();
+                String strCategory = mCategory.getText().toString();
 
                 if (strLocation.replaceAll("//s", "").equalsIgnoreCase("")
                         || strTime.replaceAll("//s", "").equalsIgnoreCase("")
@@ -134,9 +136,9 @@ public class PostDangerActivity extends AppCompatActivity {
                                                                           strDescript,
                                                                           strLocation,
                                                                           imageUrl,
-                                                                          category,
-                                                                          title,
-                                                                          userid,
+                                                                          strCategory,
+                                                                          strTitle,
+                                                                          user_id,
                                                                           pickedLat,
                                                                           pickedLng);
                     DangerList dangerList = new DangerList();
