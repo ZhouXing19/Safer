@@ -90,6 +90,41 @@
         android:textColor="@android:color/white"
         android:textSize="20dp" />
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:alpha="0.8"
+        android:layout_alignTop="@+id/time_indictator"
+        android:layout_marginStart="60dp"
+        android:layout_toEndOf="@+id/time_indictator"
+        android:theme="@style/MyMaterialTheme"
+        android:text="Pick Date"
+        android:textAlignment="center"
+        android:fontFamily="@font/light"
+        android:textColor="@android:color/white"
+        app:icon="@drawable/calendar"
+        app:iconTint="@android:color/white"
+        app:backgroundTint="@color/MyPurple" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:alpha="0.8"
+        android:layout_alignTop="@+id/time_indictator"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/datePicker"
+        android:theme="@style/MyMaterialTheme"
+        android:text="Pick Time"
+        android:textAlignment="center"
+        android:fontFamily="@font/light"
+
+        android:textColor="@android:color/white"
+        app:icon="@drawable/clock"
+        app:iconTint="@android:color/white"
+        app:backgroundTint="@color/MyPurple" />
+
     <EditText
         android:id="@+id/time"
         android:layout_width="380dp"
@@ -97,7 +132,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@id/time_indictator"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="18dp"
         android:layout_toEndOf="@+id/location_indictator"
         android:background="@drawable/inputfield"
         android:ems="10"
