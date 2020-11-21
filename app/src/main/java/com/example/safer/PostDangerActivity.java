@@ -26,8 +26,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -58,12 +61,14 @@ public class PostDangerActivity extends AppCompatActivity {
     private TextView mPickFromMap;
     private EditText mTime, mLocation, mDescription, mCategory, mTitle;
     private FloatingActionButton mPost;
-    private ExtendedFloatingActionButton pictureBtn, videoBtn;
+    private ExtendedFloatingActionButton pictureBtn, videoBtn, pickDate, pickTime;
     private File photoFile, videoFile;
     private Uri videoUri;
     public String photoFileName = "photo.jpg";
     public String videoFileName = "video.mp4";
     public Bitmap takenImage;
+
+    private String strDate = "", strTime = "";
 
     private double pickedLat, pickedLng;
 
@@ -87,6 +92,8 @@ public class PostDangerActivity extends AppCompatActivity {
         mPost = (FloatingActionButton) findViewById(R.id.postButton);
         pictureBtn = (ExtendedFloatingActionButton) findViewById(R.id.pictureBtn);
         videoBtn = (ExtendedFloatingActionButton) findViewById(R.id.videoBtn);
+        pickDate = (ExtendedFloatingActionButton) findViewById(R.id.datePicker);
+        pickTime = (ExtendedFloatingActionButton) findViewById(R.id.timePicker);
 
 
         Random random = new Random();
@@ -109,6 +116,31 @@ public class PostDangerActivity extends AppCompatActivity {
                 startActivityForResult(intent, PICK_FROM_MAP_REQUEST_CODE);
             }
         });
+
+
+        // -------------------------------------- Date Picker --------------------------------------
+        MaterialDatePicker.Builder datePickBuilder = MaterialDatePicker.Builder.datePicker();
+        datePickBuilder.setTitleText("SELECT A DATE");
+        final MaterialDatePicker materialDatePicker = datePickBuilder.build();
+        pickDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                materialDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
+            }
+        });
+
+        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(Object selection) {
+                strDate = materialDatePicker.getHeaderText();
+                mTime.setText(strDate + strTime);
+            }
+        });
+
+        // -------------------------------------- Time Picker --------------------------------------
+
+
+
 
 
         mPost.setOnClickListener(new View.OnClickListener() {

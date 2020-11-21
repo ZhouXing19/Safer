@@ -2,6 +2,8 @@ package com.example.safer;
 
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,6 +37,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.progressindicator.ProgressIndicator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,7 +60,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainMapActivity extends AppCompatActivity implements OnMapReadyCallback{
+public class MainMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLoadedCallback {
 
     private GoogleMap mMap;
     Location mLastLocation;
@@ -68,8 +71,11 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
     private List<Polyline> polylines;
     private final int REQUEST_CODE = 20;
     Marker mCurrLocationMarker;
+    private int MAP_LOADED = 0;
 
     private BottomNavigationView bottomNavigationView;
+    private ProgressIndicator progressIndicator;
+    private View darkenView;
 
     private static final String TAG = "molly_debugging";
     //private static final String TAG = MainMapActivity.class.getSimpleName();
@@ -87,6 +93,11 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        progressIndicator = (ProgressIndicator) findViewById(R.id.progressIndicator);
+        progressIndicator.show();
+
+        darkenView = (View) findViewById(R.id.darkenView);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.action_map);
@@ -200,6 +211,8 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         mMap.moveCamera(CameraUpdateFactory.newLatLng(UPC));
 
 
+        mMap.setOnMapLoadedCallback(this);
+
     }
 
 
@@ -243,6 +256,8 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                 break;
             }
         }
+
+
     }
 
 
@@ -330,5 +345,18 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
 
-
+    @Override
+    public void onMapLoaded() {
+        progressIndicator.hide();
+        darkenView.animate()
+                .alpha(0f)
+                .setDuration(2)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        darkenView.setVisibility(View.GONE);
+                    }
+                });
+        Toast.makeText(MainMapActivity.this, "Map Loaded!", Toast.LENGTH_SHORT).show();
+    }
 }
