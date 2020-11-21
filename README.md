@@ -5,9 +5,8 @@ CodePath Android University Group Project
 
 ## Table of Contents
 1. [Overview](#Overview)
-2. [Unit 10: Milestone Deliverables] (#Unit-10:-Milestone-Deliverables)
-3. [Product Spec](#Product-Spec)
-4. [Wireframes](#Wireframes)
+2. [Product Spec](#Product-Spec)
+3. [Wireframes](#Wireframes)
 
 ## Overview
 ### Description
