@@ -41,6 +41,10 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - Display danger icon and floating window
 <img src="gifs/unit10/Molly.png" width=800>
 
+### Zhou
+- Updated database schema: added entries for title, category and LatLng
+<img src="gifs/unit10/zhou.png" width=800>
+
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
