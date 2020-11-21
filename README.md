@@ -5,8 +5,9 @@ CodePath Android University Group Project
 
 ## Table of Contents
 1. [Overview](#Overview)
-2. [Product Spec](#Product-Spec)
-3. [Wireframes](#Wireframes)
+1. [Product Spec](#Product-Spec)
+1. [Wireframes](#Wireframes)
+1. [Schema](#Schema)
 
 ## Overview
 ### Description
@@ -20,11 +21,15 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - **Habit:** Students will most likely use this app at night if they are walking alone, or during the day when they are notified of a nearby danger.
 - **Scope:** This project will enable students to see nearby dangers and be able to alert others of dangers they have noticed.
 
-## Unit 10: Milestone Deliverables
-1. [X] Updated status of issues in Project board (2pts)
-2. [X] Sprint planned for next week (Issues created, assigned & added to project board) (3pts)
-3. [X] Completed user stories checked-off in README (2pts)
-4. [X] Gifs created to show build progress and added to README (3pts)
+## Unit 9: Milestone Deliverables
+[X] Updated README with Schema Section - Check out an EXAMPLE README
+[X] Data Models (3pts)
+[X] Networking (2pts)
+[X] Sprint Plan in place using GitHub project management flow.
+[X] GitHub Project created (1pt)
+[X] GitHub Milestones created (1pt)
+[X] GitHub Issues created from user stories (2pts)
+[X] Issues added to project and assigned to specific team members (1pt)
 
 ### Updated status of issues
 <img src="gifs/unit10/status_issues.png" width=400>
@@ -81,6 +86,7 @@ An android navigation app where users can share and view dangers nearby in Hyde 
    * Description view
    * Comment view
    * Comment input
+* Profile Page
 
 ### 3. Navigation
 
@@ -104,7 +110,9 @@ An android navigation app where users can share and view dangers nearby in Hyde 
    * Edit Danger Page
 * Post Danger Page
    * Danger Details Page
-
+* Profile Page
+   * Main Map Page
+   
 ## Wireframes
 <img src="design/paper_mockup.png" width=800>
 
@@ -112,6 +120,62 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 [Digital Wireframe] https://github.com/ZhouXing19/Safer/tree/master/design/digital_wireframe.pdf
 ### [BONUS] Interactive Prototype
 <img src="design/mockup_walkthrough.gif" width=200>
+
+## Schema 
+### Models
+#### Post
+1. Danger Schema
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | category      | String   | danger's category |
+   | description        | String| danger description |
+   | id     | String| unqiue id of danger |
+   | imageUrl         | String     | image url from Firebase storage |
+   | latitude       | double   | latitude of danger |
+   | location | String   | location of danger |
+   | longitude    | double   | longitude of danger |
+   | time     | DateTime | date and time this danger occured |
+   | title     | String | title of danger |
+   | userId     | String | unique id of user that created this danger post |
+   
+2. User Schema
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | dangerid        | String| id of danger the user posted |
+   | email       | String   | user's email |
+   | firstName    | String   | user's first name |
+   | id     | String   | unique id of user |
+   | imageUrl         | String     | user's profile image |
+   | lastName     | String | user's last name |
+   | password | String   | user's password |
+
+### Networking
+#### List of network requests by screen
+   - Main Map Activity Screen
+      - (Read/GET) Get all dangers from Firebase
+         ```java
+         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Danger");
+        // Attach a listener to read the data at our posts reference
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+
+                    DangerHelperClass danger = snapshot.getValue(DangerHelperClass.class);
+                }
+            }
+         }
+         ```
+   - Create Danger Screen
+      - (Create/POST) Create a new danger 
+      - (Update) Update a danger
+      - (Delete) Delete a danger
+   - Profile Screen
+      - (Create/POST) Add a new user to the database
+      - (Read/GET) Get user's information
+      - (Update/PUT) Update user's profile image
 
 ## Technology
 - Java
