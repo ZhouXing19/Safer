@@ -46,8 +46,7 @@ public class PostDangerActivity extends AppCompatActivity {
     public static final String TAG = "PostDangerActivity";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
     private static final int PICK_FROM_MAP_REQUEST_CODE = 20;
-    private static final int POST_PHOTO_REQUEST_CODE = 33;
-    private static final int POST_VIDEO_REQUEST_CODE = 34;
+
     private static final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 55;
 
     private String user_id = "";
@@ -167,43 +166,11 @@ public class PostDangerActivity extends AppCompatActivity {
         }
     }
 
-//    private void launchCamera() {
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//
-//        // Create a File reference for future access
-//        photoFile = getFileUri(photoFileName, "image");
-//
-//        // wrap File object into a content provider
-//        // required for API >= 24
-//        // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
-//        Uri fileProvider = FileProvider.getUriForFile(PostDangerActivity.this, "com.example.safer", photoFile);
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
-//
-//        if (intent.resolveActivity(getPackageManager()) != null) {
-//            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-//        }
-//    }
-
-
-    // Returns the File for a photo stored on disk given the fileName
-    public File getFileUri(String fileName, String mediaType) {
-        Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-        videoFile = getPhotoFileUri(videoFileName, "video");
-        Uri fileProvider = FileProvider.getUriForFile(PostDangerActivity.this, "com.example.safer", videoFile);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE);
-        }
-        // FIXME
-        File file = new File(fileName);
-        return file;
-    }
-
     private void launchCamera() {
-        // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
         // Create a File reference for future access
-        photoFile = getPhotoFileUri(photoFileName, "image");
+        photoFile = getFileUri(photoFileName, "image");
 
         // wrap File object into a content provider
         // required for API >= 24
@@ -211,40 +178,39 @@ public class PostDangerActivity extends AppCompatActivity {
         Uri fileProvider = FileProvider.getUriForFile(PostDangerActivity.this, "com.example.safer", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
-        // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
-        // So as long as the result is not null, it's safe to use the intent.
         if (intent.resolveActivity(getPackageManager()) != null) {
-            // Start the image capture intent to take photo
             startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
         }
     }
 
 
-
     // Returns the File for a photo stored on disk given the fileName
-    public File getPhotoFileUri(String fileName, String mediaType) {
+    public File getFileUri(String fileName, String mediaType) {
         // Get safe storage directory for photos
         // Use `getExternalFilesDir` on Context to access package-specific directories.
         // This way, we don't need to request external read/write runtime permissions.
         File mediaStorageDir;
-        switch (mediaType) {
+        switch (mediaType){
             case "image":
                 mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), TAG);
+                break;
             case "video":
                 mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_MOVIES), TAG);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + mediaType);
         }
-
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
             Log.d(TAG, "failed to create directory");
         }
         // Return the file target for the photo based on filename
         File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
+        // /storage/emulated/0/Android/data/com.example.safer/files/Pictures/PostDangerActivity/photo.jpg
         return file;
     }
+
+
 
 
 
