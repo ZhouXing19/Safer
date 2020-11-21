@@ -62,5 +62,7 @@ dependencies {
     // Declare the dependency for the Cloud Storage library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-storage'
+    // Joda-Time helps resolve stale timezone data
+    implementation 'net.danlew:android.joda:2.10.7.2'
 
 }

@@ -93,6 +93,7 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - Google Map API
 - Firebase
 - Adobe XD for UI design
+- Joda Time (https://www.joda.org/joda-time/)
 
 ## Preview
 <img src="preview_map.gif" height=370><br>

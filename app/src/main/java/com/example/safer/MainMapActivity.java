@@ -33,8 +33,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import androidx.core.app.ActivityCompat;
@@ -61,7 +64,8 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 
     private BottomNavigationView bottomNavigationView;
 
-    private static final String TAG = MainMapActivity.class.getSimpleName();
+    private static final String TAG = "molly_debugging";
+    //private static final String TAG = MainMapActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +110,9 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                 }
             }
         });
+
+        // display icons
+        displayIcon();
     }
 
     @Override
@@ -243,6 +250,40 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         geoFire.removeLocation(userId);
 
     }
+
+    // Get all data from database
+    private void displayIcon() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Danger");
+        // Attach a listener to read the data at our posts reference
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+
+                    DangerHelperClass danger = snapshot.getValue(DangerHelperClass.class);
+                    Log.i(TAG, danger.getTime());
+                    String title = danger.getTitle();
+                    String time = danger.getTime();
+                    String description = danger.getDescription();
+                    String location = danger.getLocation();
+                    String imageUrl = danger.getImageUrl();
+                    String category = danger.getCategory();
+                    String userId = danger.getUserId();
+                    double latitude = danger.getLatitude();
+                    double longitude = danger.getLongitude();
+
+                    Log.i(TAG, title + " " +  time + " " + description + " " + location + " " + imageUrl + " " + category);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+        //https:developers.google.com/maps/documentation/android-sdk/marker
+    }
+
 
 
 }

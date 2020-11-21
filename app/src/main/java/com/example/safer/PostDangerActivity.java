@@ -34,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.type.LatLng;
 
 import java.io.File;
 import java.io.IOException;
@@ -113,6 +114,11 @@ public class PostDangerActivity extends AppCompatActivity {
                 String strTime = mTime.getText().toString();
                 String strDescript = mDescription.getText().toString();
                 String strLocation = mLocation.getText().toString();
+                String title = "";
+                String category = "";
+                String userid = "";
+                double longitude = 0.0;
+                double latitude = 0.0;
 
                 if (strLocation.replaceAll("//s", "").equalsIgnoreCase("")
                         || strTime.replaceAll("//s", "").equalsIgnoreCase("")
@@ -126,7 +132,7 @@ public class PostDangerActivity extends AppCompatActivity {
                     dangerReference = rootNode.getReference("Danger");
                     userReference = rootNode.getReference("Users");
 
-                    DangerHelperClass dangerClass = new DangerHelperClass(strTime, strDescript, strLocation, imageUrl);
+                    DangerHelperClass dangerClass = new DangerHelperClass(strTime, strDescript, strLocation, imageUrl, category, title, userid, latitude, longitude);
                     DangerList dangerList = new DangerList();
 
                     dangerList.PushDanger(danger_id);
