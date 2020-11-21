@@ -22,14 +22,17 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 
 ## Milestone Deliverables
 1. [X] Updated status of issues in Project board (2pts)
-<img src="gifs/unit10/status_issues.png" width=800>
 2. [X] Sprint planned for next week (Issues created, assigned & added to project board) (3pts)
-<img src="gifs/unit10/planned_tasks.png" width=800>
 3. [X] Completed user stories checked-off in README (2pts)
 4. [X] Gifs created to show build progress and added to README (3pts)
+
+### Updated status of issues
+<img src="gifs/unit10/status_issues.png" width=400>
+### Sprint planned for next week
+<img src="gifs/unit10/planned_tasks.png" width=400>
 ### Lynn
 - RV Clickable cell + pull to refresh
-<img src="gifs/unit10/Lynn.gif" width=200>
+<img src="gifs/unit10/Lynn.gif" width=300>
 
 ### Molly
 - Retrieve real time data from firebase
@@ -109,22 +112,10 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - Google Map API
 - Firebase
 - Adobe XD for UI design
-- Joda Time (https://www.joda.org/joda-time/)
+- [Joda Time] (https://www.joda.org/joda-time/)
 
 ## Environment
 - Developed in AndroidStudio 4.0.1
 - Tested in Pixel 2 API 30
 - A [fake location simulator](https://play.google.com/store/apps/details?id=com.lexa.fakegps&hl=en_US&gl=US) is needed in the AVD
 
-## Progress
-### Implemented Functions
-- User sign up
-- User sign in
-- Map interface
-- Current Location
-- "Submit danger nearby" page
-- "Pick a location from map" page (developing)
-
-### TO-DO
-- `PickLocationActivity.java`, complete the location acquisition function on click.
-- `PostDangerActivity.java`, change the address that user inputs into lat-lang, and save in DB.
