@@ -56,7 +56,7 @@ public class PostDangerActivity extends AppCompatActivity {
 
     private ImageView mBack;
     private TextView mPickFromMap;
-    private EditText mTime, mLocation, mDescription;
+    private EditText mTime, mLocation, mDescription, mCategory, mTitle;
     private FloatingActionButton mPost;
     private ExtendedFloatingActionButton pictureBtn, videoBtn;
     private File photoFile, videoFile;
@@ -64,6 +64,8 @@ public class PostDangerActivity extends AppCompatActivity {
     public String photoFileName = "photo.jpg";
     public String videoFileName = "video.mp4";
     public Bitmap takenImage;
+
+    private double pickedLat, pickedLng;
 
     private StorageReference mStorageRef;
 
@@ -80,9 +82,12 @@ public class PostDangerActivity extends AppCompatActivity {
         mTime = (EditText) findViewById(R.id.time);
         mLocation = (EditText) findViewById(R.id.location);
         mDescription = (EditText) findViewById(R.id.descript);
+        mCategory = (EditText) findViewById(R.id.category);
+        mTitle = (EditText) findViewById(R.id.titleEt);
         mPost = (FloatingActionButton) findViewById(R.id.postButton);
         pictureBtn = (ExtendedFloatingActionButton) findViewById(R.id.pictureBtn);
         videoBtn = (ExtendedFloatingActionButton) findViewById(R.id.videoBtn);
+
 
         Random random = new Random();
         IdGenerator idGenerator = new IdGenerator(random);
@@ -113,11 +118,8 @@ public class PostDangerActivity extends AppCompatActivity {
                 String strTime = mTime.getText().toString();
                 String strDescript = mDescription.getText().toString();
                 String strLocation = mLocation.getText().toString();
-                String title = "";
-                String category = "";
-                String userid = "";
-                double longitude = 0.0;
-                double latitude = 0.0;
+                String strTitle = mTitle.getText().toString();
+                String strCategory = mCategory.getText().toString();
 
                 if (strLocation.replaceAll("//s", "").equalsIgnoreCase("")
                         || strTime.replaceAll("//s", "").equalsIgnoreCase("")
@@ -126,12 +128,19 @@ public class PostDangerActivity extends AppCompatActivity {
                 } else {
                     Log.i(TAG, "onClick: " + strLocation);
 
-
                     rootNode = FirebaseDatabase.getInstance();
                     dangerReference = rootNode.getReference("Danger");
                     userReference = rootNode.getReference("Users");
 
-                    DangerHelperClass dangerClass = new DangerHelperClass(strTime, strDescript, strLocation, imageUrl, category, title, userid, latitude, longitude);
+                    DangerHelperClass dangerClass = new DangerHelperClass(strTime,
+                                                                          strDescript,
+                                                                          strLocation,
+                                                                          imageUrl,
+                                                                          strCategory,
+                                                                          strTitle,
+                                                                          user_id,
+                                                                          pickedLat,
+                                                                          pickedLng);
                     DangerList dangerList = new DangerList();
 
                     dangerList.PushDanger(danger_id);
@@ -229,6 +238,8 @@ public class PostDangerActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Bundle extras = subintent.getExtras();
                 double[] selectedLocation = extras.getDoubleArray("SelectedLocation");
+                pickedLat = selectedLocation[0];
+                pickedLng = selectedLocation[1];
                 Log.i(TAG, "onActivityResult: " + Arrays.toString(selectedLocation));
                 Toast.makeText(this, "Selected Location successfully!", Toast.LENGTH_SHORT).show();
 

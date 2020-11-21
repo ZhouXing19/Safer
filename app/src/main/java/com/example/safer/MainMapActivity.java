@@ -202,6 +202,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
+
     // -------------- Some default settings for Google map API. No changes are needed for the following part. --------------
 
     private void checkLocationPermission() {
