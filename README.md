@@ -5,8 +5,8 @@ CodePath Android University Group Project
 
 ## Table of Contents
 1. [Overview](#Overview)
-1. [Product Spec](#Product-Spec)
-1. [Wireframes](#Wireframes)
+2. [Product Spec](#Product-Spec)
+3. [Wireframes](#Wireframes)
 
 ## Overview
 ### Description
@@ -20,16 +20,37 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - **Habit:** Students will most likely use this app at night if they are walking alone, or during the day when they are notified of a nearby danger.
 - **Scope:** This project will enable students to see nearby dangers and be able to alert others of dangers they have noticed.
 
+## Unit 10: Milestone Deliverables
+1. [X] Updated status of issues in Project board (2pts)
+2. [X] Sprint planned for next week (Issues created, assigned & added to project board) (3pts)
+3. [X] Completed user stories checked-off in README (2pts)
+4. [X] Gifs created to show build progress and added to README (3pts)
+
+### Updated status of issues
+<img src="gifs/unit10/status_issues.png" width=400>
+
+### Sprint planned for next week
+<img src="gifs/unit10/planned_tasks.png" width=400>
+
+### Lynn
+- RV Clickable cell + pull to refresh
+<img src="gifs/unit10/Lynn.gif" width=300>
+
+### Molly
+- Retrieve real time data from firebase
+- Display danger icon and floating window
+<img src="gifs/unit10/Molly.png" width=800>
+
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
 
-* Users can log in to post a danger notice
-* All nearby dangers are displayed on a map
-* An aggregated list of dangers can be viewed
-* Each danger has a detailed page with the respective image or video
+- [X] Users can log in to post a danger notice
+- [ ] All nearby dangers are displayed on a map
+- [ ] An aggregated list of dangers can be viewed
+- [X] Each danger has a detailed page with the respective image or video
 
 **Optional Nice-to-have Stories**
 
@@ -93,24 +114,10 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - Google Map API
 - Firebase
 - Adobe XD for UI design
-
-## Preview
-<img src="preview_map.gif" height=370><br>
+- Joda Time
 
 ## Environment
 - Developed in AndroidStudio 4.0.1
 - Tested in Pixel 2 API 30
 - A [fake location simulator](https://play.google.com/store/apps/details?id=com.lexa.fakegps&hl=en_US&gl=US) is needed in the AVD
 
-## Progress
-### Implemented Functions
-- User sign up
-- User sign in
-- Map interface
-- Current Location
-- "Submit danger nearby" page
-- "Pick a location from map" page (developing)
-
-### TO-DO
-- `PickLocationActivity.java`, complete the location acquisition function on click.
-- `PostDangerActivity.java`, change the address that user inputs into lat-lang, and save in DB.
