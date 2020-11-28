@@ -11,7 +11,11 @@ public class DangerHelperClass {
 
     // Overwritten constructor
     public DangerHelperClass(String time, String description, String location, String imageUrl,
-                             String category, String title, String userid, double latitude, double longitude) {
+                             String category,
+                             String title,
+                             String userid,
+                             double latitude,
+                             double longitude) {
         this.Category = category;
         this.Description = description;
         this.imageUrl = imageUrl;

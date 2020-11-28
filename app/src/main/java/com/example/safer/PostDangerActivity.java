@@ -18,6 +18,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,7 +32,9 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.timepicker.MaterialTimePicker;
+import com.google.android.material.timepicker.TimeFormat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -39,11 +43,16 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.type.LatLng;
 
+import org.joda.time.Hours;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
+import java.util.TimeZone;
 
 
 public class PostDangerActivity extends AppCompatActivity {
@@ -52,6 +61,7 @@ public class PostDangerActivity extends AppCompatActivity {
     private static final int PICK_FROM_MAP_REQUEST_CODE = 20;
 
     private static final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 55;
+    String[] CATEGORIES = {"Robbery", "Fighting", "Gun-carrying", "Carjacking"};
 
     private String user_id = "";
     private String danger_id = "";
@@ -59,16 +69,25 @@ public class PostDangerActivity extends AppCompatActivity {
 
     private ImageView mBack;
     private TextView mPickFromMap;
-    private EditText mTime, mLocation, mDescription, mCategory, mTitle;
+    private EditText mTime, mLocation, mDescription, mTitle;
+    private TextInputLayout mCategory;
     private FloatingActionButton mPost;
     private ExtendedFloatingActionButton pictureBtn, videoBtn, pickDate, pickTime;
     private File photoFile, videoFile;
+    private AutoCompleteTextView mAutoCompleteCategory;
     private Uri videoUri;
     public String photoFileName = "photo.jpg";
     public String videoFileName = "video.mp4";
+    private String mTimeZone;
     public Bitmap takenImage;
 
-    private String strDate = "", strTime = "";
+    private Calendar startDate = Calendar.getInstance();
+    private Calendar endDate = Calendar.getInstance();
+    private Calendar startTime = Calendar.getInstance();
+    private Calendar endTime = Calendar.getInstance();
+
+    private String strDate = ""
+    private StringBuilder strTime;
 
     private double pickedLat, pickedLng;
 
@@ -77,23 +96,27 @@ public class PostDangerActivity extends AppCompatActivity {
     FirebaseDatabase rootNode;
     DatabaseReference dangerReference, userReference;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_danger);
+
+        mTimeZone = TimeZone.getDefault().getID();
 
         mBack = (ImageView) findViewById(R.id.back);
         mPickFromMap = (TextView) findViewById(R.id.pickupfrommap);
         mTime = (EditText) findViewById(R.id.time);
         mLocation = (EditText) findViewById(R.id.location);
         mDescription = (EditText) findViewById(R.id.descript);
-        mCategory = (EditText) findViewById(R.id.category);
+        mCategory = (TextInputLayout) findViewById(R.id.category_layout);
         mTitle = (EditText) findViewById(R.id.titleEt);
         mPost = (FloatingActionButton) findViewById(R.id.postButton);
         pictureBtn = (ExtendedFloatingActionButton) findViewById(R.id.pictureBtn);
         videoBtn = (ExtendedFloatingActionButton) findViewById(R.id.videoBtn);
         pickDate = (ExtendedFloatingActionButton) findViewById(R.id.datePicker);
         pickTime = (ExtendedFloatingActionButton) findViewById(R.id.timePicker);
+        mAutoCompleteCategory = (AutoCompleteTextView) findViewById(R.id.category);
 
 
         Random random = new Random();
@@ -140,8 +163,24 @@ public class PostDangerActivity extends AppCompatActivity {
         });
 
         // -------------------------------------- Time Picker --------------------------------------
+        final MaterialTimePicker materialTimePicker = new MaterialTimePicker.Builder()
+                                                    .setTimeFormat(TimeFormat.CLOCK_24H)
+                                                    .build();
+        pickTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                materialTimePicker.show(getSupportFragmentManager(), "fragment_tag");
+            }
+        });
 
 
+
+
+        // -------------------------------------- Dropdown Menu --------------------------------------
+
+        ArrayAdapter adapter = new ArrayAdapter(getBaseContext(), R.layout.list_item, CATEGORIES);
+
+        mAutoCompleteCategory.setAdapter(adapter);
 
 
 
@@ -153,7 +192,7 @@ public class PostDangerActivity extends AppCompatActivity {
                 String strDescript = mDescription.getText().toString();
                 String strLocation = mLocation.getText().toString();
                 String strTitle = mTitle.getText().toString();
-                String strCategory = mCategory.getText().toString();
+                String strCategory = mAutoCompleteCategory.getText().toString();
 
                 if (strLocation.replaceAll("//s", "").equalsIgnoreCase("")
                         || strTime.replaceAll("//s", "").equalsIgnoreCase("")
