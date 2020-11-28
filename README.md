@@ -60,7 +60,7 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 
 - [X] Users can log in to post a danger notice
 - [X] All nearby dangers are displayed on a map
-- [ ] An aggregated list of dangers can be viewed
+- [X] An aggregated list of dangers can be viewed
 - [X] Each danger has a detailed page with the respective image or video
 
 **Optional Nice-to-have Stories**
