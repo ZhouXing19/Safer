@@ -81,13 +81,13 @@ public class PostDangerActivity extends AppCompatActivity {
     private String mTimeZone;
     public Bitmap takenImage;
 
-    private Calendar startDate = Calendar.getInstance();
-    private Calendar endDate = Calendar.getInstance();
-    private Calendar startTime = Calendar.getInstance();
-    private Calendar endTime = Calendar.getInstance();
+    private Calendar rightNow = Calendar.getInstance();
+    private int currentHourIn24Format;
+    private int currentMinutes;
 
-    private String strDate = ""
-    private StringBuilder strTime;
+    private String strDate = "";
+    private StringBuilder sbTime = new StringBuilder();
+    private String wholeTimeStr = "";
 
     private double pickedLat, pickedLng;
 
@@ -102,7 +102,8 @@ public class PostDangerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_danger);
 
-        mTimeZone = TimeZone.getDefault().getID();
+        mTimeZone = "[" + TimeZone.getDefault().getID() + "] ";
+
 
         mBack = (ImageView) findViewById(R.id.back);
         mPickFromMap = (TextView) findViewById(R.id.pickupfrommap);
@@ -117,6 +118,8 @@ public class PostDangerActivity extends AppCompatActivity {
         pickDate = (ExtendedFloatingActionButton) findViewById(R.id.datePicker);
         pickTime = (ExtendedFloatingActionButton) findViewById(R.id.timePicker);
         mAutoCompleteCategory = (AutoCompleteTextView) findViewById(R.id.category);
+
+        mTime.setText(mTimeZone);
 
 
         Random random = new Random();
@@ -158,20 +161,43 @@ public class PostDangerActivity extends AppCompatActivity {
             @Override
             public void onPositiveButtonClick(Object selection) {
                 strDate = materialDatePicker.getHeaderText();
-                mTime.setText(strDate + strTime);
+                wholeTimeStr = getWholeTimeStr(mTimeZone, strDate, sbTime);
+                mTime.setText(wholeTimeStr);
             }
         });
 
         // -------------------------------------- Time Picker --------------------------------------
-        final MaterialTimePicker materialTimePicker = new MaterialTimePicker.Builder()
-                                                    .setTimeFormat(TimeFormat.CLOCK_24H)
-                                                    .build();
+
         pickTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                currentHourIn24Format = rightNow.get(Calendar.HOUR_OF_DAY);
+                currentMinutes = rightNow.get(Calendar.MINUTE);
+
+                final MaterialTimePicker materialTimePicker = new MaterialTimePicker.Builder()
+                        .setTimeFormat(TimeFormat.CLOCK_24H)
+                        .setHour(currentHourIn24Format)
+                        .setMinute(currentMinutes)
+                        .build();
+
                 materialTimePicker.show(getSupportFragmentManager(), "fragment_tag");
+                // Don't touch -- it's magic
+                materialTimePicker.addOnPositiveButtonClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View dialog) {
+                        String newHour = String.valueOf(materialTimePicker.getHour());
+                        String newMinute = String.valueOf(materialTimePicker.getMinute());
+                        PostDangerActivity.this.onTimeSet(newHour, newMinute);
+
+                        wholeTimeStr = getWholeTimeStr(mTimeZone, strDate, sbTime);
+                        mTime.setText(wholeTimeStr);
+                    }
+                });
             }
         });
+
+
+
 
 
 
@@ -240,6 +266,18 @@ public class PostDangerActivity extends AppCompatActivity {
         });
 
     }
+
+    private void onTimeSet(String newHour, String newMinute) {
+        sbTime = new StringBuilder();
+        sbTime.append(newHour);
+        sbTime.append(":");
+        sbTime.append(newMinute);
+    }
+
+    private String getWholeTimeStr(String mTimeZone, String strDate, StringBuilder sbTime){
+        return  mTimeZone + " " + strDate + " " + sbTime.toString();
+    }
+
 
     private void launchVideoCamera() {
             Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
