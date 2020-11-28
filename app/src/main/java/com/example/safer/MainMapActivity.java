@@ -308,14 +308,24 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                     String userId = danger.getUserId();
                     double latitude = danger.getLatitude();
                     double longitude = danger.getLongitude();
-                    Log.i(TAG, "coordinates" + String.valueOf(latitude) + String.valueOf(longitude));
+                    Log.i(TAG, category);
                     LatLng dangerLocation = new LatLng(latitude, longitude);
-                    mMap.addMarker(new MarkerOptions()
-                            .position(dangerLocation)
-                            .title(title)
-                            .icon(getBitmap(R.drawable.ic_handcuffs))
-                            .snippet(location + "\n"+ time)
-                    );
+                    if (category.equals("Robbery")) {
+                        mMap.addMarker(new MarkerOptions()
+                                .position(dangerLocation)
+                                .title(title)
+                                .icon(getBitmap(R.drawable.ic_handcuffs))
+                                .snippet(location + "\n"+ time)
+                        );
+                    } else if (category.equals("Arrest")) {
+                        mMap.addMarker(new MarkerOptions()
+                                .position(dangerLocation)
+                                .title(title)
+                                .icon(getBitmap(R.drawable.ic_police_line))
+                                .snippet(location + "\n"+ time)
+                        );
+                    }
+
 
                     mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 

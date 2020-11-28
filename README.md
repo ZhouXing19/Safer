@@ -21,15 +21,11 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - **Habit:** Students will most likely use this app at night if they are walking alone, or during the day when they are notified of a nearby danger.
 - **Scope:** This project will enable students to see nearby dangers and be able to alert others of dangers they have noticed.
 
-## Unit 9: Milestone Deliverables
-- [X] Updated README with Schema Section - Check out an EXAMPLE README
-- [X] Data Models (3pts)
-- [X] Networking (2pts)
-- [X] Sprint Plan in place using GitHub project management flow.
-- [X] GitHub Project created (1pt)
-- [X] GitHub Milestones created (1pt)
-- [X] GitHub Issues created from user stories (2pts)
-- [X] Issues added to project and assigned to specific team members (1pt)
+## Unit 10: Milestone Deliverables
+- [X] Updated status of issues in Project board (2pts)
+- [X] Sprint planned for next week (Issues created, assigned & added to project board) (3pts)
+- [X] Completed user stories checked-off in README (2pts)
+- [X] Gifs created to show build progress and added to README (3pts)
 
 ### Trello: Milestones and Issues
 <img src="gifs/unit10/status_issues.png" width=400>
@@ -42,13 +38,19 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 <img src="gifs/unit10/Lynn.gif" width=300>
 
 ### Molly
-- Retrieve real time data from firebase
-- Display danger icon and floating window
-<img src="gifs/unit10/Molly.png" width=800>
+- Replaced png images with vector assets
+- Displays appropriate icon based on category
+<img src="gifs/unit10/Molly.png" width=300>
 
 ### Zhou
-- Updated database schema: added entries for title, category and LatLng
-<img src="gifs/unit10/zhou.gif" width=800>
+- Calendar and Clock for time entry
+<img src="gifs/unit10/calendar.gif" width=800>
+
+- Dropdown menu for category selection on PostDangerActivity
+<img src="gifs/unit10/dropdownmenu.gif" width=800>
+
+- Progress indicator for loading map
+<img src="gifs/unit10/progressindicator.gif" width=800>
 
 ## Product Spec
 
@@ -57,7 +59,7 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 **Required Must-have Stories**
 
 - [X] Users can log in to post a danger notice
-- [ ] All nearby dangers are displayed on a map
+- [X] All nearby dangers are displayed on a map
 - [ ] An aggregated list of dangers can be viewed
 - [X] Each danger has a detailed page with the respective image or video
 
