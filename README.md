@@ -44,13 +44,13 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 
 ### Zhou
 - Calendar and Clock for time entry
-<img src="gifs/unit10/calendar.gif" width=800>
+<img src="gifs/unit10/calendar.gif" width=300>
 
 - Dropdown menu for category selection on PostDangerActivity
-<img src="gifs/unit10/dropdownmenu.gif" width=800>
+<img src="gifs/unit10/dropdownmenu.gif" width=300>
 
 - Progress indicator for loading map
-<img src="gifs/unit10/progressindicator.gif" width=800>
+<img src="gifs/unit10/progressindicator.gif" width=300>
 
 ## Product Spec
 
