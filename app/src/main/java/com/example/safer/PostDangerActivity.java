@@ -410,7 +410,7 @@ public class PostDangerActivity extends AppCompatActivity {
 
 
         if (requestCode == CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE){
-            if (requestCode == RESULT_OK){
+            if (resultCode == RESULT_OK){
                 videoUri = subintent.getData();
                 mStorageRef = FirebaseStorage.getInstance().getReference();
 
