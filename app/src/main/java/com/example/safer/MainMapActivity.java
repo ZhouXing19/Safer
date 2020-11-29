@@ -4,12 +4,17 @@ package com.example.safer;
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,6 +35,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
@@ -274,6 +280,16 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
+    // Converts a vector drawable to a bitmap
+    private BitmapDescriptor getBitmap(int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(this, vectorResId);
+        Bitmap bitmap = Bitmap.createBitmap(70, 70, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
     // Get all data from database
     private void displayIcon() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Danger");
@@ -282,9 +298,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-
                     DangerHelperClass danger = snapshot.getValue(DangerHelperClass.class);
-                    //Log.i(TAG, danger.getTime());
                     String title = danger.getTitle();
                     String time = danger.getTime();
                     String description = danger.getDescription();
@@ -294,14 +308,24 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                     String userId = danger.getUserId();
                     double latitude = danger.getLatitude();
                     double longitude = danger.getLongitude();
-                    Log.i(TAG, "coordinates" + String.valueOf(latitude) + String.valueOf(longitude));
+                    Log.i(TAG, category);
                     LatLng dangerLocation = new LatLng(latitude, longitude);
-                    mMap.addMarker(new MarkerOptions()
-                            .position(dangerLocation)
-                            .title(title)
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.handcuffs))
-                            .snippet(location + "\n"+ time)
-                    );
+                    if (category.equals("Robbery")) {
+                        mMap.addMarker(new MarkerOptions()
+                                .position(dangerLocation)
+                                .title(title)
+                                .icon(getBitmap(R.drawable.ic_handcuffs))
+                                .snippet(location + "\n"+ time)
+                        );
+                    } else if (category.equals("Arrest")) {
+                        mMap.addMarker(new MarkerOptions()
+                                .position(dangerLocation)
+                                .title(title)
+                                .icon(getBitmap(R.drawable.ic_police_line))
+                                .snippet(location + "\n"+ time)
+                        );
+                    }
+
 
                     mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
@@ -332,7 +356,6 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                             return info;
                         }
                     });
-                    //Log.i(TAG, title + " " +  time + " " + description + " " + location + " " + imageUrl + " " + category);
                 }
             }
 
