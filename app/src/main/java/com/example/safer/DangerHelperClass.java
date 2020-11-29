@@ -3,18 +3,27 @@ package com.example.safer;
 import com.google.type.LatLng;
 
 public class DangerHelperClass {
-    String Title, Time, Description, Location, imageUrl, Category, UserId;
+    String Title, Time, Description, Location, imageUrl, Category, UserId, videoUrl;
     double Latitude, Longitude;
     // Empty constructor
     public DangerHelperClass() {
     }
 
     // Overwritten constructor
-    public DangerHelperClass(String time, String description, String location, String imageUrl,
-                             String category, String title, String userid, double latitude, double longitude) {
+    public DangerHelperClass(String time,
+                             String description,
+                             String location,
+                             String imageUrl,
+                             String videoUrl,
+                             String category,
+                             String title,
+                             String userid,
+                             double latitude,
+                             double longitude) {
         this.Category = category;
         this.Description = description;
         this.imageUrl = imageUrl;
+        this.videoUrl = videoUrl;
         this.Latitude = latitude;
         this.Location = location;
         this.Longitude = longitude;
@@ -22,6 +31,10 @@ public class DangerHelperClass {
         this.Title = title;
         this.UserId = userid;
     }
+
+
+
+
 
     // Getter for all attributes
     public String getTime() {
@@ -47,6 +60,8 @@ public class DangerHelperClass {
     public double getLatitude() { return Latitude; }
 
     public double getLongitude() { return Longitude; }
+
+    public String getVideoUrl() { return videoUrl; }
 
     public void setTitle(String title) {
         Title = title;
@@ -83,4 +98,6 @@ public class DangerHelperClass {
     public void setLongitude(double longitude) {
         Longitude = longitude;
     }
+
+    public void setVideoUrl(String videoUrl) { this.videoUrl = videoUrl; }
 }
