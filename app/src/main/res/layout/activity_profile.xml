@@ -48,6 +48,14 @@
         android:fontFamily="@font/thin"
         android:textSize="15sp" />
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/profilecard"
+        android:layout_above="@+id/logoutBtn"/>
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/logoutBtn"
         android:layout_width="wrap_content"

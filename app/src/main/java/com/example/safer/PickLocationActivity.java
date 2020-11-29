@@ -3,6 +3,7 @@ package com.example.safer;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -22,6 +24,7 @@ public class PickLocationActivity extends FragmentActivity implements OnMapReady
 
     private GoogleMap mMap;
     private FloatingActionButton submitButton;
+    public static final String TAG = "PICKLOCATIONACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,20 @@ public class PickLocationActivity extends FragmentActivity implements OnMapReady
         mMap = googleMap;
         submitButton = (FloatingActionButton) findViewById(R.id.submitButton);
 
-        // Add a marker in Sydney and move the camera
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = mMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.style_json));
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Can't find style. Error: ", e);
+        }
+
         LatLng MainQuad = new LatLng(41.7885889, -87.5997399);
         LatLng UPC = new LatLng(41.7951455, -87.5914046);
         mMap.addMarker(new MarkerOptions().position(MainQuad).title("Marker in UChicago"));

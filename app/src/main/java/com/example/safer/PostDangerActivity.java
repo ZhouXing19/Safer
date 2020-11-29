@@ -65,7 +65,7 @@ public class PostDangerActivity extends AppCompatActivity {
 
     private String user_id = "";
     private String danger_id = "";
-    private String imageUrl, videoUrl;
+    private String imageUrl = "", videoUrl = "";
 
     private ImageView mBack;
     private TextView mPickFromMap;
@@ -235,6 +235,7 @@ public class PostDangerActivity extends AppCompatActivity {
                                                                           strDescript,
                                                                           strLocation,
                                                                           imageUrl,
+                                                                          videoUrl,
                                                                           strCategory,
                                                                           strTitle,
                                                                           user_id,

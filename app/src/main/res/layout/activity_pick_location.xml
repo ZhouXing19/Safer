@@ -8,12 +8,6 @@
     tools:context="com.example.safer.PickLocationActivity" >
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/menu_bottom_navigation" />
 
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -43,15 +37,14 @@
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="16dp"
-        app:srcCompat="@drawable/ic_add"
-        android:backgroundTint="@color/danganRed"
-        android:layout_alignParentBottom="true"
-        android:tint="@android:color/white"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        app:layout_anchorGravity="end" />
+        android:layout_gravity="bottom"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/danganRed"
+        android:tint="@android:color/white"
+        app:layout_anchorGravity="end"
+        app:srcCompat="@drawable/ic_add" />
 
 </RelativeLayout>
