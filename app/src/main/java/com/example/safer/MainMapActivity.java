@@ -4,6 +4,8 @@ package com.example.safer;
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +24,7 @@ import android.os.Looper;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -45,6 +48,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.progressindicator.ProgressIndicator;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,6 +57,8 @@ import com.google.firebase.database.ValueEventListener;
 
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import android.view.Gravity;
@@ -78,10 +84,13 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
     private final int REQUEST_CODE = 20;
     Marker mCurrLocationMarker;
     private int MAP_LOADED = 0;
+    int myId = 0;
 
     private BottomNavigationView bottomNavigationView;
     private ProgressIndicator progressIndicator;
     private View darkenView;
+    private FirebaseDatabase myFirebaseDatabase;
+    private DatabaseReference myFDref;
 
     private static final String TAG = "molly_debugging";
     //private static final String TAG = MainMapActivity.class.getSimpleName();
@@ -137,7 +146,59 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 
         // display icons
         displayIcon();
+
+        // notification system
+        myFDref = FirebaseDatabase.getInstance().getReference().child("Danger");
+        myFDref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                notification();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
+
+    private void notification(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("n", "n", NotificationManager.IMPORTANCE_DEFAULT);
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+        NotificationCompat.Builder ntfBuilder = new NotificationCompat.Builder(this, "n")
+                .setContentTitle("Safer App")
+                .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
+                .setAutoCancel(true)
+                .setContentText("Here's a new posted danger");
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
+        managerCompat.notify(999, ntfBuilder.build());
+
+
+    }
+
 
     @Override
     public void onPause() {
