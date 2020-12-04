@@ -2,10 +2,21 @@ package com.example.safer;
 
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +24,7 @@ import android.os.Looper;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,28 +38,41 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.progressindicator.ProgressIndicator;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainMapActivity extends AppCompatActivity implements OnMapReadyCallback{
+public class MainMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLoadedCallback {
 
     private GoogleMap mMap;
     Location mLastLocation;
@@ -58,10 +83,17 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
     private List<Polyline> polylines;
     private final int REQUEST_CODE = 20;
     Marker mCurrLocationMarker;
+    private int MAP_LOADED = 0;
+    int myId = 0;
 
     private BottomNavigationView bottomNavigationView;
+    private ProgressIndicator progressIndicator;
+    private View darkenView;
+    private FirebaseDatabase myFirebaseDatabase;
+    private DatabaseReference myFDref;
 
-    private static final String TAG = MainMapActivity.class.getSimpleName();
+    private static final String TAG = "molly_debugging";
+    //private static final String TAG = MainMapActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +108,11 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        progressIndicator = (ProgressIndicator) findViewById(R.id.progressIndicator);
+        progressIndicator.show();
+
+        darkenView = (View) findViewById(R.id.darkenView);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.action_map);
@@ -106,7 +143,62 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                 }
             }
         });
+
+        // display icons
+        displayIcon();
+
+        // notification system
+        myFDref = FirebaseDatabase.getInstance().getReference().child("Danger");
+        myFDref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                notification();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
+
+    private void notification(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("n", "n", NotificationManager.IMPORTANCE_DEFAULT);
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+        NotificationCompat.Builder ntfBuilder = new NotificationCompat.Builder(this, "n")
+                .setContentTitle("Safer App")
+                .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
+                .setAutoCancel(true)
+                .setContentText("Here's a new posted danger");
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
+        managerCompat.notify(999, ntfBuilder.build());
+
+
+    }
+
 
     @Override
     public void onPause() {
@@ -186,7 +278,10 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         mMap.moveCamera(CameraUpdateFactory.newLatLng(UPC));
 
 
+        mMap.setOnMapLoadedCallback(this);
+
     }
+
 
     // -------------- Some default settings for Google map API. No changes are needed for the following part. --------------
 
@@ -228,6 +323,8 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                 break;
             }
         }
+
+
     }
 
 
@@ -244,5 +341,106 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
+    // Converts a vector drawable to a bitmap
+    private BitmapDescriptor getBitmap(int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(this, vectorResId);
+        Bitmap bitmap = Bitmap.createBitmap(70, 70, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
 
+    // Get all data from database
+    private void displayIcon() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Danger");
+        // Attach a listener to read the data at our posts reference
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                    DangerHelperClass danger = snapshot.getValue(DangerHelperClass.class);
+                    String title = danger.getTitle();
+                    String time = danger.getTime();
+                    String description = danger.getDescription();
+                    String location = danger.getLocation();
+                    String imageUrl = danger.getImageUrl();
+                    String category = danger.getCategory();
+                    String userId = danger.getUserId();
+                    double latitude = danger.getLatitude();
+                    double longitude = danger.getLongitude();
+                    Log.i(TAG, category);
+                    LatLng dangerLocation = new LatLng(latitude, longitude);
+                    if (category.equals("Robbery")) {
+                        mMap.addMarker(new MarkerOptions()
+                                .position(dangerLocation)
+                                .title(title)
+                                .icon(getBitmap(R.drawable.ic_handcuffs))
+                                .snippet(location + "\n"+ time)
+                        );
+                    } else if (category.equals("Arrest")) {
+                        mMap.addMarker(new MarkerOptions()
+                                .position(dangerLocation)
+                                .title(title)
+                                .icon(getBitmap(R.drawable.ic_police_line))
+                                .snippet(location + "\n"+ time)
+                        );
+                    }
+
+
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+                        @Override
+                        public View getInfoWindow(Marker arg0) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            LinearLayout info = new LinearLayout(MainMapActivity.this);
+                            info.setOrientation(LinearLayout.VERTICAL);
+
+                            TextView title = new TextView(MainMapActivity.this);
+                            title.setTextColor(Color.BLACK);
+                            title.setGravity(Gravity.CENTER);
+                            title.setTypeface(null, Typeface.BOLD);
+                            title.setText(marker.getTitle());
+
+                            TextView snippet = new TextView(MainMapActivity.this);
+                            snippet.setTextColor(Color.GRAY);
+                            snippet.setText(marker.getSnippet());
+
+                            info.addView(title);
+                            info.addView(snippet);
+
+                            return info;
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+        //https:developers.google.com/maps/documentation/android-sdk/marker
+    }
+
+
+    @Override
+    public void onMapLoaded() {
+        progressIndicator.hide();
+        darkenView.animate()
+                .alpha(0f)
+                .setDuration(2)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        darkenView.setVisibility(View.GONE);
+                    }
+                });
+        Toast.makeText(MainMapActivity.this, "Map Loaded!", Toast.LENGTH_SHORT).show();
+    }
 }

@@ -7,6 +7,7 @@ CodePath Android University Group Project
 1. [Overview](#Overview)
 1. [Product Spec](#Product-Spec)
 1. [Wireframes](#Wireframes)
+1. [Schema](#Schema)
 
 ## Overview
 ### Description
@@ -20,16 +21,47 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - **Habit:** Students will most likely use this app at night if they are walking alone, or during the day when they are notified of a nearby danger.
 - **Scope:** This project will enable students to see nearby dangers and be able to alert others of dangers they have noticed.
 
+## Unit 10: Milestone Deliverables
+- [X] Updated status of issues in Project board (2pts)
+- [X] Sprint planned for next week (Issues created, assigned & added to project board) (3pts)
+- [X] Completed user stories checked-off in README (2pts)
+- [X] Gifs created to show build progress and added to README (3pts)
+
+### Trello: Milestones and Issues
+<img src="gifs/unit10/status_issues.png" width=400>
+
+### Trello: Sprint Plan and assigned team members
+<img src="gifs/unit10/planned_tasks.png" width=400>
+
+### Lynn
+- RV Clickable cell + pull to refresh
+<img src="gifs/unit10/Lynn.gif" width=300>
+
+### Molly
+- Replaced png images with vector assets
+- Displays appropriate icon based on category
+<img src="gifs/unit10/Molly.png" width=300>
+
+### Zhou
+- Calendar and Clock for time entry
+<img src="gifs/unit10/calendar.gif" width=300>
+
+- Dropdown menu for category selection on PostDangerActivity
+<img src="gifs/unit10/dropdownmenu.gif" width=300>
+
+- Progress indicator for loading map
+<img src="gifs/unit10/progressindicator.gif" width=300>
+
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
 
-* Users can log in to post a danger notice
-* All nearby dangers are displayed on a map
-* An aggregated list of dangers can be viewed
-* Each danger has a detailed page with the respective image or video
+- [X] Users can log in to post a danger notice
+- [X] All nearby dangers are displayed on a map
+- [X] An aggregated list of dangers can be viewed
+- [X] Each danger has a detailed page with the respective image or video
 
 **Optional Nice-to-have Stories**
 
@@ -56,6 +88,7 @@ An android navigation app where users can share and view dangers nearby in Hyde 
    * Description view
    * Comment view
    * Comment input
+* Profile Page
 
 ### 3. Navigation
 
@@ -79,7 +112,9 @@ An android navigation app where users can share and view dangers nearby in Hyde 
    * Edit Danger Page
 * Post Danger Page
    * Danger Details Page
-
+* Profile Page
+   * Main Map Page
+   
 ## Wireframes
 <img src="design/paper_mockup.png" width=800>
 
@@ -88,29 +123,70 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 ### [BONUS] Interactive Prototype
 <img src="design/mockup_walkthrough.gif" width=200>
 
+## Schema 
+### Models
+1. Danger Schema
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | category      | String   | danger's category |
+   | description        | String| danger description |
+   | id     | String| unqiue id of danger |
+   | imageUrl         | String     | image url from Firebase storage |
+   | latitude       | double   | latitude of danger |
+   | location | String   | location of danger |
+   | longitude    | double   | longitude of danger |
+   | time     | DateTime | date and time this danger occured |
+   | title     | String | title of danger |
+   | userId     | String | unique id of user that created this danger post |
+   
+2. User Schema
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | dangerid        | String| id of danger the user posted |
+   | email       | String   | user's email |
+   | firstName    | String   | user's first name |
+   | id     | String   | unique id of user |
+   | imageUrl         | String     | user's profile image |
+   | lastName     | String | user's last name |
+   | password | String   | user's password |
+
+### Networking
+#### List of network requests by screen
+   - Main Map Activity Screen
+      - (Read/GET) Get all dangers from Firebase
+         ```java
+         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Danger");
+        // Attach a listener to read the data at our posts reference
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+
+                    DangerHelperClass danger = snapshot.getValue(DangerHelperClass.class);
+                }
+            }
+         }
+         ```
+   - Create Danger Screen
+      - (Create/POST) Create a new danger 
+      - (Update) Update a danger
+      - (Delete) Delete a danger
+   - Profile Screen
+      - (Create/POST) Add a new user to the database
+      - (Read/GET) Get user's information
+      - (Update/PUT) Update user's profile image
+
 ## Technology
 - Java
 - Google Map API
 - Firebase
 - Adobe XD for UI design
-
-## Preview
-<img src="preview_map.gif" height=370><br>
+- Joda Time
 
 ## Environment
 - Developed in AndroidStudio 4.0.1
 - Tested in Pixel 2 API 30
 - A [fake location simulator](https://play.google.com/store/apps/details?id=com.lexa.fakegps&hl=en_US&gl=US) is needed in the AVD
 
-## Progress
-### Implemented Functions
-- User sign up
-- User sign in
-- Map interface
-- Current Location
-- "Submit danger nearby" page
-- "Pick a location from map" page (developing)
-
-### TO-DO
-- `PickLocationActivity.java`, complete the location acquisition function on click.
-- `PostDangerActivity.java`, change the address that user inputs into lat-lang, and save in DB.
