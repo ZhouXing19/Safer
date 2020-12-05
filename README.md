@@ -21,6 +21,9 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - **Habit:** Students will most likely use this app at night if they are walking alone, or during the day when they are notified of a nearby danger.
 - **Scope:** This project will enable students to see nearby dangers and be able to alert others of dangers they have noticed.
 
+### Trello Board
+<img src="gifs/unit11/trello.png" width=600>
+
 ### Completed User Stories
 - [X] Send user a notification when new danger is posted in the real time database
 - [X] Add video url to the database schema
