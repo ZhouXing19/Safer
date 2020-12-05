@@ -17,6 +17,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,11 +31,15 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.firebase.geofire.GeoFire;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApi;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -45,6 +51,8 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.progressindicator.ProgressIndicator;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,17 +70,24 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.security.PrivilegedActionException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLoadedCallback {
+public class MainMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLoadedCallback,
+        GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleMap mMap;
     Location mLastLocation;
@@ -95,10 +110,16 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
     private static final String TAG = "molly_debugging";
     //private static final String TAG = MainMapActivity.class.getSimpleName();
 
+    // widgets
+    AutoCompleteTextView mSearchText;
+    private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_map);
+
+        mSearchText = (AutoCompleteTextView) findViewById(R.id.input_search);
 
         polylines = new ArrayList<>();
 
@@ -139,7 +160,8 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                         intent = new Intent(MainMapActivity.this, ProfileActivity.class);
                         startActivity(intent);
                         return true;
-                    default: return true;
+                    default:
+                        return true;
                 }
             }
         });
@@ -175,12 +197,10 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 
             }
         });
-
-
     }
 
-    private void notification(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+    private void notification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("n", "n", NotificationManager.IMPORTANCE_DEFAULT);
 
             NotificationManager manager = getSystemService(NotificationManager.class);
@@ -195,45 +215,66 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
         managerCompat.notify(999, ntfBuilder.build());
-
-
     }
 
 
     @Override
     public void onPause() {
         super.onPause();
+        if (mFusedLocationClient == null) {
+            Log.i(TAG, "this is null right now");
+        }
+        if (mLocationCallback == null) {
+            Log.i(TAG, "this is also null right now");
+        }
 
         //stop location updates when Activity is no longer active
+//        if (mFusedLocationClient != null) {
+//            mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+//        }
         if (mFusedLocationClient != null) {
-            mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+            try {
+                Log.i(TAG, "trying");
+                final Task<Void> voidTask = mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+                if (voidTask.isSuccessful()) {
+                    Log.d(TAG, "StopLocation updates successful! ");
+                } else {
+                    Log.d(TAG, "StopLocation updates unsuccessful! " + voidTask.toString());
+                }
+            } catch (SecurityException exp) {
+                Log.d(TAG, " Security exception while removeLocationUpdates");
+            }
+        } else {
+
         }
     }
-
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        //Log.i(TAG, "map is ready");
         // -------------- Auto requests for locations (No need to change this part) --------------
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000); //every 1 second, get a new location request
         mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY); //use a log of battery, but ensure great accuracy
+        // initialize search bar
 
-
-        LocationCallback mLocationCallback = new LocationCallback(){
+        LocationCallback mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
+//                if (locationResult == null) {
+//                    Log.i(TAG, "found a null object");
+//                }
                 List<Location> locationList = locationResult.getLocations();
 
-                for(Location location: locationResult.getLocations()){
+                for (Location location : locationResult.getLocations()) {
 
-                    if(getApplicationContext()!=null){
+                    if (getApplicationContext() != null) {
                         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+                        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        }
                     }
                 }
             }
@@ -241,13 +282,14 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Log.i(TAG, "request");
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 //Location Permission already granted
                 mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
                 mMap.setMyLocationEnabled(true);
-            }else{
+            } else {
                 checkLocationPermission();
             }
         }
@@ -274,19 +316,16 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         LatLng MainQuad = new LatLng(41.7885889, -87.5997399);
         LatLng UPC = new LatLng(41.7951455, -87.5914046);
         mMap.addMarker(new MarkerOptions().position(MainQuad).title("Marker in UChicago"));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo((float)14.2));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo((float) 14.2));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(UPC));
-
-
         mMap.setOnMapLoadedCallback(this);
-
+        //getDeviceLocation();
     }
-
 
     // -------------- Some default settings for Google map API. No changes are needed for the following part. --------------
 
     private void checkLocationPermission() {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
                 new AlertDialog.Builder(this)
                         .setTitle("give permission")
@@ -299,8 +338,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                         })
                         .create()
                         .show();
-            }
-            else{
+            } else {
                 ActivityCompat.requestPermissions(MainMapActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
         }
@@ -310,14 +348,14 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch(requestCode){
-            case 1:{
-                if(grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+        switch (requestCode) {
+            case 1: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                         mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
                         mMap.setMyLocationEnabled(true);
                     }
-                } else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Please provide the permission", Toast.LENGTH_LONG).show();
                 }
                 break;
@@ -326,8 +364,6 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 
 
     }
-
-
 
 
     @Override
@@ -358,7 +394,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     DangerHelperClass danger = snapshot.getValue(DangerHelperClass.class);
                     String title = danger.getTitle();
                     String time = danger.getTime();
@@ -370,20 +406,21 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                     double latitude = danger.getLatitude();
                     double longitude = danger.getLongitude();
                     Log.i(TAG, category);
+                    Log.i(TAG, category);
                     LatLng dangerLocation = new LatLng(latitude, longitude);
                     if (category.equals("Robbery")) {
                         mMap.addMarker(new MarkerOptions()
                                 .position(dangerLocation)
                                 .title(title)
                                 .icon(getBitmap(R.drawable.ic_handcuffs))
-                                .snippet(location + "\n"+ time)
+                                .snippet(location + "\n" + time)
                         );
                     } else if (category.equals("Arrest")) {
                         mMap.addMarker(new MarkerOptions()
                                 .position(dangerLocation)
                                 .title(title)
                                 .icon(getBitmap(R.drawable.ic_police_line))
-                                .snippet(location + "\n"+ time)
+                                .snippet(location + "\n" + time)
                         );
                     }
 
@@ -442,5 +479,69 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
                     }
                 });
         Toast.makeText(MainMapActivity.this, "Map Loaded!", Toast.LENGTH_SHORT).show();
+        intializeSearch();
+    }
+
+    private void intializeSearch() {
+        mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH
+                        || actionId == EditorInfo.IME_ACTION_DONE
+                        || keyEvent.getAction() == keyEvent.ACTION_DOWN
+                        || keyEvent.getAction() == keyEvent.KEYCODE_ENTER) {
+                    //execute our method for searching
+                    Log.i(TAG, "starting search");
+                    geoLocate();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void geoLocate() {
+        String searchString = mSearchText.getText().toString();
+        Geocoder geocoder = new Geocoder(MainMapActivity.this);
+        List<Address> list = new ArrayList<>();
+        try {
+            list = geocoder.getFromLocationName(searchString, 1);
+        } catch (IOException e) {
+            Log.i(TAG, "geoLocation: IOException: " + e.getMessage());
+        }
+        if (list.size() > 0) {
+            Address address = list.get(0);
+            Log.i(TAG, "geolocate: found a location: " + address.toString());
+            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), 15f);
+        }
+    }
+
+    private void getDeviceLocation() {
+        Log.i(TAG, "getDeviceLocation");
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Task location = mFusedLocationClient.getLastLocation();
+            location.addOnCompleteListener(new OnCompleteListener() {
+                @Override
+                public void onComplete(@NonNull Task task) {
+                    if (task.isSuccessful()) {
+                        Location currentLocation = (Location) task.getResult();
+                        moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),15f);
+                        Log.i(TAG, "on complete: found location!");
+                    }
+                }
+            });
+        }
+    }
+
+    private void moveCamera(LatLng latLng, float zoom) {
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+        //Move the camera to the user's location and zoom in!
+        //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }

@@ -21,36 +21,20 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - **Habit:** Students will most likely use this app at night if they are walking alone, or during the day when they are notified of a nearby danger.
 - **Scope:** This project will enable students to see nearby dangers and be able to alert others of dangers they have noticed.
 
-## Unit 10: Milestone Deliverables
-- [X] Updated status of issues in Project board (2pts)
-- [X] Sprint planned for next week (Issues created, assigned & added to project board) (3pts)
-- [X] Completed user stories checked-off in README (2pts)
-- [X] Gifs created to show build progress and added to README (3pts)
+### Completed User Stories
+- [X] Send user a notification when new danger is posted in the real time database
+- [X] Add video url to the database schema
+- [X] Search map by location
 
-### Trello: Milestones and Issues
-<img src="gifs/unit10/status_issues.png" width=400>
+### Unit 11 Gifs
+- Send user a notification when new danger is posted in the real time database
+<img src="gifs/unit11/notification.gif" width=300>
 
-### Trello: Sprint Plan and assigned team members
-<img src="gifs/unit10/planned_tasks.png" width=400>
+- Add video url to the database schema
+<img src="gifs/unit11/videoUrl.png" width=600>
 
-### Lynn
-- RV Clickable cell + pull to refresh
-<img src="gifs/unit10/Lynn.gif" width=300>
-
-### Molly
-- Replaced png images with vector assets
-- Displays appropriate icon based on category
-<img src="gifs/unit10/Molly.png" width=300>
-
-### Zhou
-- Calendar and Clock for time entry
-<img src="gifs/unit10/calendar.gif" width=300>
-
-- Dropdown menu for category selection on PostDangerActivity
-<img src="gifs/unit10/dropdownmenu.gif" width=300>
-
-- Progress indicator for loading map
-<img src="gifs/unit10/progressindicator.gif" width=300>
+- Search map by location
+<img src="gifs/unit11/search.gif" width=300>
 
 ## Product Spec
 

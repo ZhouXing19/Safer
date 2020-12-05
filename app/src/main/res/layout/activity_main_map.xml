@@ -14,11 +14,44 @@
         android:layout_above="@id/bottom_navigation"
         tools:context=".DriverMapActivity" />
 
+    <RelativeLayout
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/white_border"
+        android:elevation="10dp">
+
+        <ImageView
+            android:id="@+id/ic_magnify"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            app:srcCompat="@drawable/ic_magnify" />
+
+        <AutoCompleteTextView
+            android:id="@+id/input_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ic_magnify"
+            android:background="@null"
+            android:hint="Enter Address, City or Zip Code"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:textColor="#000"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
         app:menu="@menu/menu_bottom_navigation" />
 
     <com.google.android.material.progressindicator.ProgressIndicator

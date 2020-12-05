@@ -126,7 +126,10 @@ public class PostDangerActivity extends AppCompatActivity {
         IdGenerator idGenerator = new IdGenerator(random);
         danger_id = idGenerator.nextId();
 
-        user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if (FirebaseAuth.getInstance().getCurrentUser() != null){
+            user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+
 
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
