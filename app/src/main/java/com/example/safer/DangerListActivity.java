@@ -62,8 +62,6 @@ public class DangerListActivity extends AppCompatActivity {
                 // TODO
                 adapter.clear();
                 fetchDangersFromFirebase();
-                adapter.addAll(dangers);
-                adapter.notifyDataSetChanged();
 
                 swipeContainer.setRefreshing(false);
             }

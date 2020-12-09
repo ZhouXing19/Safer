@@ -48,14 +48,15 @@ public class DangerDetailActivity extends AppCompatActivity {
         });
 
         // populate data
-        Danger danger = (Danger) Parcels.unwrap(getIntent().getParcelableExtra(DangerAdapter.KEY_DANGER));
+        DangerHelperClass danger = (DangerHelperClass) Parcels.unwrap(getIntent().getParcelableExtra(DangerAdapter.KEY_DANGER));
         tvTitle.setText(danger.getTitle());
         // unix time to human-readable date
-        Date date = new java.util.Date(danger.getUnixTime());
-        tvTime.setText(date.toString());
-        tvAddress.setText(danger.getAddress());
+//        Date date = new java.util.Date(danger.getUnixTime());
+        String time = danger.getTime();
+        tvTime.setText(time.toString());
+        tvAddress.setText(danger.getLocation());
         tvDescription.setText(danger.getDescription());
-        Glide.with(this).load(danger.getImgUrl()).into(ivDanger);
+        Glide.with(this).load(danger.getImageUrl()).into(ivDanger);
 
 //        // video
 //        final VideoView mVideoView = (VideoView) findViewById(R.id.vvDanger);
