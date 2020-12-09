@@ -1,7 +1,9 @@
 package com.example.safer;
 
 import com.google.type.LatLng;
+import org.parceler.Parcel;
 
+@Parcel
 public class DangerHelperClass {
     String Title, Time, Description, Location, imageUrl, Category, UserId, videoUrl;
     double Latitude, Longitude;

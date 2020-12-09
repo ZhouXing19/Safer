@@ -8,39 +8,41 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.safer.models.Danger;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class DangerListActivity extends AppCompatActivity {
 
-    ArrayList<Danger> dangers;
+    ArrayList<DangerHelperClass> dangers;
 
     private BottomNavigationView bottomNavigationView;
     private SwipeRefreshLayout swipeContainer;
+
+    DangerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danger_list);
         dangers = new ArrayList<>();
-
-        // TODO: add real data
-        Danger temp = new Danger("robbery", "a student was approached by an armed individual",
-                "some user", 1604698894, "", "466 Maple Street");
-        dangers.add(temp);
-        temp = new Danger("arrest", "man with gun arrested",
-                "some user", 1604698999, "", "9999 King East Ave");
-        dangers.add(temp);
+        adapter = new DangerAdapter(this, dangers);
+        fetchDangersFromFirebase(); // this populates dangers
 
         // Lookup the recyclerview in activity layout
         RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rvDangers);
 
         // Create adapter passing in the sample user data
-        final DangerAdapter adapter = new DangerAdapter(this, dangers);
+
         // Attach the adapter to the recyclerview to populate items
         rvContacts.setAdapter(adapter);
         // Set layout manager to position the items
@@ -58,12 +60,10 @@ public class DangerListActivity extends AppCompatActivity {
                 // once the network request has completed successfully.
 
                 // TODO
-//                adapter.clear();
-
-                Danger temp = new Danger("more data", "a student was approached by an armed individual",
-                        "some user", 1604698894, "", "466 Maple Street");
-                dangers.add(temp);
+                adapter.clear();
+                fetchDangersFromFirebase();
                 adapter.addAll(dangers);
+                adapter.notifyDataSetChanged();
 
                 swipeContainer.setRefreshing(false);
             }
@@ -100,6 +100,28 @@ public class DangerListActivity extends AppCompatActivity {
                         return true;
                     default: return true;
                 }
+            }
+        });
+    }
+
+    private void fetchDangersFromFirebase() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Danger");
+        // Attach a listener to read the data at our posts reference
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    DangerHelperClass danger = snapshot.getValue(DangerHelperClass.class);
+                    dangers.add(danger);
+                    Log.d("DangerListActivity", "Inside listener length " + dangers.size());
+                }
+                adapter.addAll(dangers);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("The read failed: " + error.getCode());
             }
         });
     }

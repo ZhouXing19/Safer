@@ -1,8 +1,7 @@
 package com.example.safer.models;
 
-import org.parceler.Parcel;
+// this class is no longer used, see DangerHelperClass
 
-@Parcel
 public class Danger {
 
     private String title;

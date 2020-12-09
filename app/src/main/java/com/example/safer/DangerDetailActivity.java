@@ -57,18 +57,18 @@ public class DangerDetailActivity extends AppCompatActivity {
         tvDescription.setText(danger.getDescription());
         Glide.with(this).load(danger.getImgUrl()).into(ivDanger);
 
-        // video
-        final VideoView mVideoView = (VideoView) findViewById(R.id.vvDanger);
-        mVideoView.setVideoPath("http://techslides.com/demos/sample-videos/small.mp4");
-        MediaController mediaController = new MediaController(this);
-        mediaController.setAnchorView(mVideoView);
-        mVideoView.setMediaController(mediaController);
-        mVideoView.requestFocus();
-        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            // Close the progress bar and play the video
-            public void onPrepared(MediaPlayer mp) {
-                mVideoView.start();
-            }
-        });
+//        // video
+//        final VideoView mVideoView = (VideoView) findViewById(R.id.vvDanger);
+//        mVideoView.setVideoPath("http://techslides.com/demos/sample-videos/small.mp4");
+//        MediaController mediaController = new MediaController(this);
+//        mediaController.setAnchorView(mVideoView);
+//        mVideoView.setMediaController(mediaController);
+//        mVideoView.requestFocus();
+//        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//            // Close the progress bar and play the video
+//            public void onPrepared(MediaPlayer mp) {
+//                mVideoView.start();
+//            }
+//        });
     }
 }

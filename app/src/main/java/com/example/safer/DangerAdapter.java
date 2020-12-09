@@ -21,10 +21,10 @@ import java.util.ArrayList;
 public class DangerAdapter extends RecyclerView.Adapter<DangerAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<Danger> dangers;
+    ArrayList<DangerHelperClass> dangers;
     static final String KEY_DANGER = "danger";
 
-    public DangerAdapter(Context context, ArrayList<Danger> dangers) {
+    public DangerAdapter(Context context, ArrayList<DangerHelperClass> dangers) {
         this.context = context;
         this.dangers = dangers;
     }
@@ -44,7 +44,7 @@ public class DangerAdapter extends RecyclerView.Adapter<DangerAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Danger danger = dangers.get(position);
+        final DangerHelperClass danger = dangers.get(position);
 
         holder.tvTitle.setText(danger.getTitle());
         holder.tvDescription.setText(danger.getDescription());
@@ -86,10 +86,10 @@ public class DangerAdapter extends RecyclerView.Adapter<DangerAdapter.ViewHolder
             ivDanger = (ImageView) itemView.findViewById(R.id.danger_image);
         }
 
-        public void bind(Danger danger) {
+        public void bind(DangerHelperClass danger) {
             tvTitle.setText(danger.getTitle());
             tvDescription.setText(danger.getDescription());
-            Glide.with(context).load(danger.getImgUrl()).into(ivDanger);
+            Glide.with(context).load(danger.getImageUrl()).into(ivDanger);
         }
     }
 
@@ -100,7 +100,7 @@ public class DangerAdapter extends RecyclerView.Adapter<DangerAdapter.ViewHolder
     }
 
     // Add a list of items -- change to type used
-    public void addAll(ArrayList<Danger> list) {
+    public void addAll(ArrayList<DangerHelperClass> list) {
         dangers.addAll(list);
         notifyDataSetChanged();
     }
