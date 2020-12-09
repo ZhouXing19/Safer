@@ -232,7 +232,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
 //        if (mFusedLocationClient != null) {
 //            mFusedLocationClient.removeLocationUpdates(mLocationCallback);
 //        }
-        if (mFusedLocationClient != null) {
+        if (mFusedLocationClient != null && mLocationCallback != null) {
             try {
                 Log.i(TAG, "trying");
                 final Task<Void> voidTask = mFusedLocationClient.removeLocationUpdates(mLocationCallback);
@@ -369,12 +369,13 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
     @Override
     protected void onStop() {
         super.onStop();
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driverAvailable");
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driverAvailable");
 
-        GeoFire geoFire = new GeoFire(ref);
-        geoFire.removeLocation(userId);
-
+            GeoFire geoFire = new GeoFire(ref);
+            geoFire.removeLocation(userId);
+        }
     }
 
     // Converts a vector drawable to a bitmap
