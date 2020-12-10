@@ -39,7 +39,7 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.Places;
+//import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -373,8 +373,6 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driverAvailable");
 
-            GeoFire geoFire = new GeoFire(ref);
-            geoFire.removeLocation(userId);
         }
     }
 
