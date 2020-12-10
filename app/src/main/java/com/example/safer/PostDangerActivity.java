@@ -250,6 +250,9 @@ public class PostDangerActivity extends AppCompatActivity {
                     dangerReference.child(danger_id).setValue(dangerClass);
                     userReference.child(user_id).child("dangers").child(danger_id).setValue(true);
 
+                    Toast.makeText(PostDangerActivity.this, "Danger Posted!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(PostDangerActivity.this, MainMapActivity.class);
+                    startActivity(intent);
                 }
             }
 
