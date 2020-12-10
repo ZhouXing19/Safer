@@ -145,6 +145,25 @@
         app:iconTint="@android:color/white"
         app:backgroundTint="@color/MyPurple" />
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/pickupfrommap"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_toEndOf="@+id/location_indictator"
+        android:layout_alignBottom="@+id/location_indictator"
+        app:icon="@drawable/ic_baseline_push_pin_24"
+        app:iconTint="@color/white"
+        android:text="select on map"
+        android:textSize="12dp"
+        android:alpha="0.8"
+        android:textAlignment="center"
+        android:paddingVertical="0dp"
+        android:fontFamily="@font/light"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="2dp"
+        app:backgroundTint="@color/MyPurple"
+        android:layout_marginStart="50dp"/>
+
     <EditText
         android:id="@+id/time"
         android:layout_width="380dp"
@@ -175,16 +194,7 @@
         android:textColor="@android:color/white"
         android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/pickupfrommap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/location_indictator"
-        android:layout_alignBottom="@+id/location_indictator"
-        android:text="(select on map?)"
-        android:textColor="@android:color/darker_gray"
-        android:layout_marginBottom="2dp"
-        android:layout_marginStart="50dp"/>
+
 
 
 

@@ -36,7 +36,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".DangerDetailActivity"></activity>
         <activity android:name=".DangerListActivity"></activity>
-        <activity android:name=".MainMapActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,7 +59,7 @@
             android:name=".PickLocationActivity"
             android:label="@string/title_activity_pick_location" />
         <activity android:name=".PostDangerActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainMapActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ProfileActivity" />
         <activity
