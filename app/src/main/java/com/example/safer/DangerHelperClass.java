@@ -5,14 +5,17 @@ import org.parceler.Parcel;
 
 @Parcel
 public class DangerHelperClass {
-    String Title, Time, Description, Location, imageUrl, Category, UserId, videoUrl;
+    String Title, Time, timestamp, Description, Location, imageUrl, Category, UserId, videoUrl;
     double Latitude, Longitude;
     // Empty constructor
     public DangerHelperClass() {
     }
 
+
+
     // Overwritten constructor
     public DangerHelperClass(String time,
+                             String timestamp,
                              String description,
                              String location,
                              String imageUrl,
@@ -30,6 +33,7 @@ public class DangerHelperClass {
         this.Location = location;
         this.Longitude = longitude;
         this.Time = time;
+        this.timestamp = timestamp;
         this.Title = title;
         this.UserId = userid;
     }
@@ -62,6 +66,8 @@ public class DangerHelperClass {
     public double getLatitude() { return Latitude; }
 
     public double getLongitude() { return Longitude; }
+
+    public String getTimestamp() { return timestamp; }
 
     public String getVideoUrl() { return videoUrl; }
 
