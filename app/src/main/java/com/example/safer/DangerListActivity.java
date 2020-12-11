@@ -20,6 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DangerListActivity extends AppCompatActivity {
 
@@ -113,6 +115,8 @@ public class DangerListActivity extends AppCompatActivity {
                     dangers.add(danger);
                     Log.d("DangerListActivity", "Inside listener length " + dangers.size());
                 }
+
+                Collections.sort(dangers, new dangerComparator());
                 adapter.addAll(dangers);
                 adapter.notifyDataSetChanged();
             }
@@ -122,5 +126,12 @@ public class DangerListActivity extends AppCompatActivity {
                 System.out.println("The read failed: " + error.getCode());
             }
         });
+    }
+
+    public class dangerComparator implements Comparator<DangerHelperClass> {
+        @Override
+        public int compare(DangerHelperClass o1, DangerHelperClass o2) {
+            return o1.getTimestamp().compareTo(o2.getTime());
+        }
     }
 }

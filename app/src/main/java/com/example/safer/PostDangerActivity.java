@@ -80,6 +80,7 @@ public class PostDangerActivity extends AppCompatActivity {
     public String videoFileName = "video.mp4";
     private String mTimeZone;
     public Bitmap takenImage;
+    private String timestamp;
 
     private Calendar rightNow = Calendar.getInstance();
     private int currentHourIn24Format;
@@ -225,7 +226,8 @@ public class PostDangerActivity extends AppCompatActivity {
 
                 if (strLocation.replaceAll("//s", "").equalsIgnoreCase("")
                         || strTime.replaceAll("//s", "").equalsIgnoreCase("")
-                        || strDescript.replaceAll("//s", "").equalsIgnoreCase("")) {
+                        || strDescript.replaceAll("//s", "").equalsIgnoreCase("")
+                        || strDate.equals("") || sbTime.toString().equals("")) {
                     Toast.makeText(PostDangerActivity.this, "Complete the info!", Toast.LENGTH_SHORT).show();
                 } else {
                     Log.i(TAG, "onClick: " + strLocation);
@@ -233,8 +235,14 @@ public class PostDangerActivity extends AppCompatActivity {
                     rootNode = FirebaseDatabase.getInstance();
                     dangerReference = rootNode.getReference("Danger");
                     userReference = rootNode.getReference("Users");
+                    Log.i(TAG, "onClick: strDate:" + strDate);
+                    Log.i(TAG, "onClick: sbTime:" + sbTime);
+                    timestamp = new GetNumericDate(strDate, sbTime.toString()).transform();
+                    Log.i(TAG, "onClick: timestamp:" + timestamp);
+
 
                     DangerHelperClass dangerClass = new DangerHelperClass(strTime,
+                                                                          timestamp,
                                                                           strDescript,
                                                                           strLocation,
                                                                           imageUrl,
