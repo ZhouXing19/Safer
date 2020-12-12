@@ -21,7 +21,7 @@ Users are able to view all dangerous activities that have occurred near their lo
 help to alert others by signing into Safer and creating a danger post. Each posted danger has a details page with
 the date, time, location, description, and respective image or video.
 
-**[Watch Presentation Video Here]**(https://youtu.be/We2zheGOxu8)
+[Watch Presentation Video Here] https://youtu.be/We2zheGOxu8
 
 ### App Evaluation
 - **Category:** Safety
