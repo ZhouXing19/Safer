@@ -5,13 +5,13 @@ CodePath Android University Group Project
 
 ## Table of Contents
 1. [Overview](#Overview)
-1. [Unit 12] (#Unit 12)
-1. [Product Spec](#Product-Spec)
-1. [Wireframes](#Wireframes)
-1. [Schema](#Schema)
-1. [Networking] (#Networking)
-1. [Technology] (#Technology)
-1. [Environment] (#Environment)
+2. [Unit 12] (#unit-12)
+3. [Product Spec](#Product-Spec)
+4. [Wireframes](#Wireframes)
+5. [Schema](#Schema)
+6. [Networking] (#networking)
+7. [Technology] (#technology)
+8. [Environment] (#environment)
 
 ## Overview
 ### Description
@@ -44,8 +44,8 @@ the date, time, location, description, and respective image or video.
 
 ### Unit 12 Gifs
 - Demo Video - User Stories
-<img src="gifs/unit12/Asuka.gif" width=300>
-<img src="gifs/unit12/Shinji.gif" width=300>
+<img src="gifs/unit12/Asuka.gif" width=700>
+<img src="gifs/unit12/Shinji.gif" width=700>
 
 ## Product Spec
 
