@@ -5,16 +5,15 @@ CodePath Android University Group Project
 
 ## Table of Contents
 1. [Overview](#Overview)
-2. [Unit 12] (#unit-12)
+2. [Unit 12](#Unit-12)
 3. [Product Spec](#Product-Spec)
 4. [Wireframes](#Wireframes)
 5. [Schema](#Schema)
-6. [Networking] (#networking)
-7. [Technology] (#technology)
-8. [Environment] (#environment)
+6. [Networking](#Networking)
+7. [Technology](#Technology)
+8. [Environment](#Environment)
 
 ## Overview
-### Description
 **Problem**: As female college students, we often do not feel safe traveling at night and simply rely on
 our gut instincts or by word of mouth regarding which areas to avoid.
 **Solution**: To solve this problem, our team developed Safer, an android app that displays nearby dangers in real time.
@@ -22,7 +21,7 @@ Users are able to view all dangerous activities that have occurred near their lo
 help to alert others by signing into Safer and creating a danger post. Each posted danger has a details page with
 the date, time, location, description, and respective image or video.
 
-[Watch Presentation Video Here](https://youtu.be/We2zheGOxu8)
+**[Watch Presentation Video Here]**(https://youtu.be/We2zheGOxu8)
 
 ### App Evaluation
 - **Category:** Safety
