@@ -5,6 +5,7 @@ CodePath Android University Group Project
 
 ## Table of Contents
 1. [Overview](#Overview)
+1. [Unit 12] (#Unit 12)
 1. [Product Spec](#Product-Spec)
 1. [Wireframes](#Wireframes)
 1. [Schema](#Schema)
@@ -21,6 +22,8 @@ Users are able to view all dangerous activities that have occurred near their lo
 help to alert others by signing into Safer and creating a danger post. Each posted danger has a details page with
 the date, time, location, description, and respective image or video.
 
+[Watch Presentation Video Here](https://youtu.be/We2zheGOxu8)
+
 ### App Evaluation
 - **Category:** Safety
 - **Mobile:** This application will be a mobile solution.
@@ -29,6 +32,7 @@ the date, time, location, description, and respective image or video.
 - **Habit:** Students will most likely use this app at night if they are walking alone, or during the day when they are notified of a nearby danger.
 - **Scope:** This project will enable students to see nearby dangers and be able to alert others of dangers they have witnessed.
 
+## Unit 12
 ### Trello Board
 <img src="gifs/unit12/trello.png" width=600>
 
@@ -39,8 +43,9 @@ the date, time, location, description, and respective image or video.
 - [X] Recorded demo day video
 
 ### Unit 12 Gifs
-- Demo Video
-<img src="gifs/unit12/demo1.gif" width=300>
+- Demo Video - User Stories
+<img src="gifs/unit12/Asuka.gif" width=300>
+<img src="gifs/unit12/Shinji.gif" width=300>
 
 ## Product Spec
 
