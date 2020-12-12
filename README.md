@@ -21,7 +21,7 @@ Users are able to view all dangerous activities that have occurred near their lo
 help to alert others by signing into Safer and creating a danger post. Each posted danger has a details page with
 the date, time, location, description, and respective image or video.
 
-[Watch Presentation Video Here] (https://www.youtube.com/watch?v=We2zheGOxu8&feature=youtu.be)
+**Watch Presentation Video Here** https://www.youtube.com/watch?v=We2zheGOxu8&feature=youtu.be
 
 ### App Evaluation
 - **Category:** Safety
@@ -43,8 +43,8 @@ the date, time, location, description, and respective image or video.
 
 ### Unit 12 Gifs
 - Demo Video - User Stories
-<img src="gifs/unit12/Asuka.gif" width=700>
-<img src="gifs/unit12/Shinji.gif" width=700>
+<img src="gifs/unit12/Asuka.gif" width=800>
+<img src="gifs/unit12/Shinji.gif" width=800>
 
 ## Product Spec
 
@@ -112,7 +112,7 @@ the date, time, location, description, and respective image or video.
 <img src="design/paper_mockup.png" width=800>
 
 ### [BONUS] Digital Wireframes & Mockups
-[Digital Wireframe] https://github.com/ZhouXing19/Safer/tree/master/design/digital_wireframe.pdf
+Digital Wireframe -> https://github.com/ZhouXing19/Safer/tree/master/design/digital_wireframe.pdf
 ### [BONUS] Interactive Prototype
 <img src="design/mockup_walkthrough.gif" width=200>
 
