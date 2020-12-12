@@ -8,10 +8,18 @@ CodePath Android University Group Project
 1. [Product Spec](#Product-Spec)
 1. [Wireframes](#Wireframes)
 1. [Schema](#Schema)
+1. [Networking] (#Networking)
+1. [Technology] (#Technology)
+1. [Environment] (#Environment)
 
 ## Overview
 ### Description
-An android navigation app where users can share and view dangers nearby in Hyde Park Region in Chicago, IL.
+**Problem**: As female college students, we often do not feel safe traveling at night and simply rely on
+our gut instincts or by word of mouth regarding which areas to avoid.
+**Solution**: To solve this problem, our team developed Safer, an android app that displays nearby dangers in real time.
+Users are able to view all dangerous activities that have occurred near their location. Anyone in the community can
+help to alert others by signing into Safer and creating a danger post. Each posted danger has a details page with
+the date, time, location, description, and respective image or video.
 
 ### App Evaluation
 - **Category:** Safety
@@ -19,32 +27,26 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - **Story:** Students and local residents are now aware of crimes or dangers nearby. They have more control over their own safety.
 - **Market:** This app will be primarily targeted towards students that attend college.
 - **Habit:** Students will most likely use this app at night if they are walking alone, or during the day when they are notified of a nearby danger.
-- **Scope:** This project will enable students to see nearby dangers and be able to alert others of dangers they have noticed.
+- **Scope:** This project will enable students to see nearby dangers and be able to alert others of dangers they have witnessed.
 
 ### Trello Board
-<img src="gifs/unit11/trello.png" width=600>
+<img src="gifs/unit12/trello.png" width=600>
 
 ### Completed User Stories
-- [X] Send user a notification when new danger is posted in the real time database
-- [X] Add video url to the database schema
-- [X] Search map by location
+- [X] Fixed bug for app crashes on navigation
+- [X] Modified the styling of navigation bar
+- [X] Fixed login bug
+- [X] Recorded demo day video
 
-### Unit 11 Gifs
-- Send user a notification when new danger is posted in the real time database
-<img src="gifs/unit11/notification.gif" width=300>
-
-- Add video url to the database schema
-<img src="gifs/unit11/videoUrl.png" width=600>
-
-- Search map by location
-<img src="gifs/unit11/search.gif" width=300>
+### Unit 12 Gifs
+- Demo Video
+<img src="gifs/unit12/demo1.gif" width=300>
 
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
-
 - [X] Users can log in to post a danger notice
 - [X] All nearby dangers are displayed on a map
 - [X] An aggregated list of dangers can be viewed
@@ -139,8 +141,8 @@ An android navigation app where users can share and view dangers nearby in Hyde 
    | lastName     | String | user's last name |
    | password | String   | user's password |
 
-### Networking
-#### List of network requests by screen
+## Networking
+### List of network requests by screen
    - Main Map Activity Screen
       - (Read/GET) Get all dangers from Firebase
          ```java
@@ -169,7 +171,7 @@ An android navigation app where users can share and view dangers nearby in Hyde 
 - Java
 - Google Map API
 - Firebase
-- Adobe XD for UI design
+- Adobe XD
 - Joda Time
 
 ## Environment
