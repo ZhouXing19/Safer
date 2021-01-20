@@ -16,6 +16,7 @@ CodePath Android University Group Project
 ## Overview
 **Problem**: As female college students, we often do not feel safe traveling at night and simply rely on
 our gut instincts or by word of mouth regarding which areas to avoid.
+
 **Solution**: To solve this problem, our team developed Safer, an android app that displays nearby dangers in real time.
 Users are able to view all dangerous activities that have occurred near their location. Anyone in the community can
 help to alert others by signing into Safer and creating a danger post. Each posted danger has a details page with
@@ -31,17 +32,7 @@ the date, time, location, description, and respective image or video.
 - **Habit:** Students will most likely use this app at night if they are walking alone, or during the day when they are notified of a nearby danger.
 - **Scope:** This project will enable students to see nearby dangers and be able to alert others of dangers they have witnessed.
 
-## Unit 12
-### Trello Board
-<img src="gifs/unit12/trello.png" width=600>
-
-### Completed User Stories
-- [X] Fixed bug for app crashes on navigation
-- [X] Modified the styling of navigation bar
-- [X] Fixed login bug
-- [X] Recorded demo day video
-
-### Unit 12 Gifs
+### Walkthrough Gifs
 - Demo Video - User Stories
 <img src="gifs/unit12/Asuka.gif" width=800>
 <img src="gifs/unit12/Shinji.gif" width=800>
